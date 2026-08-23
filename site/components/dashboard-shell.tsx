@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Fragment, useState } from "react";
 import { AvatarChoice } from "@/components/avatar-choice";
 import { CoreWordMatch } from "@/components/greeting-word-match";
+import { FoodConversationGuide } from "@/components/food-conversation-guide";
 import { GreetingResponseGuide } from "@/components/greeting-response-guide";
 import { GreetingVocabularyGuide } from "@/components/greeting-vocabulary-guide";
 import { NumbersInSentences } from "@/components/numbers-in-sentences";
@@ -40,7 +41,7 @@ const coreMatchLabels: Record<
 
 export function DashboardShell() {
   const { progress, setProgress, ready } = useProgressState();
-  const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | "numbers-in-sentences" | null>(null);
+  const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | "food-conversations" | "numbers-in-sentences" | null>(null);
 
   return (
     <main className="page-shell">
@@ -217,6 +218,30 @@ export function DashboardShell() {
                   {openLesson === "greeting-responses" ? (
                     <div id="start-here-greeting-responses" className="border-t border-portugalGreen/15 bg-sand/20 p-2 sm:p-3">
                       <GreetingResponseGuide />
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+              {lesson.slug === "food" ? (
+                <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+                  <button
+                    type="button"
+                    aria-expanded={openLesson === "food-conversations"}
+                    aria-controls="start-here-food-conversations"
+                    onClick={() => setOpenLesson((current) => current === "food-conversations" ? null : "food-conversations")}
+                    className="flex min-h-20 w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-portugalGreen/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-portugalGreen sm:px-6"
+                  >
+                    <span className="font-display text-2xl font-bold text-portugalGreen sm:text-3xl">Food Conversations</span>
+                    <span
+                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border border-portugalGreen/20 bg-portugalGreen/10 text-xl font-bold text-portugalGreen transition-transform ${openLesson === "food-conversations" ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    >
+                      ↓
+                    </span>
+                  </button>
+                  {openLesson === "food-conversations" ? (
+                    <div id="start-here-food-conversations" className="border-t border-portugalGreen/15 bg-sand/20 p-2 sm:p-3">
+                      <FoodConversationGuide />
                     </div>
                   ) : null}
                 </div>

@@ -130,25 +130,25 @@ const beginnerLessonSeeds: LessonSeed[] = [
   {
     slug: "food",
     title: "Food",
-    subtitle: "Ordering simple meals",
-    description: "Learn Start Here vocabulary for cafes, markets, and casual restaurant moments.",
-    accentHint: "Listen for softer consonants in phrases like 'por favor'.",
+    subtitle: "Core food and drink words",
+    description: "Learn ten everyday food and drink words before using them in a conversation.",
+    accentHint: "Listen to each word, then match it to its English meaning.",
     phrases: [
-      { portuguese: "Queria leite e pão, por favor.", english: "I would like milk and bread, please.", tip: "A polite supermarket request using words taught in this Food lesson.", genderCue: { gender: "masculine", appliesTo: "noun", word: "leite e pão", explanation: "Leite and pão are both masculine nouns: o leite and o pão." } },
       { portuguese: "água", english: "water", tip: "The stress falls early: AH-gwa.", genderCue: { gender: "feminine", appliesTo: "noun", word: "água", explanation: "Água is a feminine noun: a água." } },
       { portuguese: "pão", english: "bread", tip: "The tilde marks a nasal sound.", genderCue: { gender: "masculine", appliesTo: "noun", word: "pão", explanation: "Pão is a masculine noun: o pão." } },
-      { portuguese: "Queijo", english: "cheese", tip: "The 'quei' part sounds close to 'kay'.", genderCue: { gender: "masculine", appliesTo: "noun", word: "Queijo", explanation: "Queijo is a masculine noun: o queijo." } },
-      { portuguese: "A conta, por favor", english: "The bill, please", tip: "Perfect for the end of a meal.", genderCue: { gender: "feminine", appliesTo: "noun", word: "conta", explanation: "Conta is a feminine noun, so it uses the article a." } },
+      { portuguese: "queijo", english: "cheese", tip: "The 'quei' part sounds close to 'kay'.", genderCue: { gender: "masculine", appliesTo: "noun", word: "queijo", explanation: "Queijo is a masculine noun: o queijo." } },
       { portuguese: "sopa", english: "soup", tip: "A useful word when reading a menu.", genderCue: { gender: "feminine", appliesTo: "noun", word: "sopa", explanation: "Sopa is a feminine noun: a sopa." } },
       { portuguese: "leite", english: "milk", tip: "Useful when ordering coffee or breakfast.", genderCue: { gender: "masculine", appliesTo: "noun", word: "leite", explanation: "Leite is a masculine noun: o leite." } },
-      { portuguese: "sumo de laranja", english: "orange juice", tip: "In Portugal, juice is normally called sumo.", genderCue: { gender: "masculine", appliesTo: "noun", word: "sumo", explanation: "Sumo is a masculine noun: o sumo." } },
-      { portuguese: "um pastel de nata", english: "a custard tart", tip: "A classic order in a Portuguese café.", genderCue: { gender: "masculine", appliesTo: "noun", word: "pastel", explanation: "Pastel is a masculine noun, so say um pastel." } },
-      { portuguese: "sem açúcar", english: "without sugar", tip: "Useful when ordering drinks." }
+      { portuguese: "café", english: "coffee", tip: "A useful café word.", genderCue: { gender: "masculine", appliesTo: "noun", word: "café", explanation: "Café is a masculine noun: o café." } },
+      { portuguese: "chá", english: "tea", tip: "A common hot drink.", genderCue: { gender: "masculine", appliesTo: "noun", word: "chá", explanation: "Chá is a masculine noun: o chá." } },
+      { portuguese: "açúcar", english: "sugar", tip: "Useful when choosing how you take a drink.", genderCue: { gender: "masculine", appliesTo: "noun", word: "açúcar", explanation: "Açúcar is normally a masculine noun: o açúcar." } },
+      { portuguese: "arroz", english: "rice", tip: "A common part of Portuguese meals.", genderCue: { gender: "masculine", appliesTo: "noun", word: "arroz", explanation: "Arroz is a masculine noun: o arroz." } },
+      { portuguese: "peixe", english: "fish", tip: "A useful menu word in Portugal.", genderCue: { gender: "masculine", appliesTo: "noun", word: "peixe", explanation: "Peixe is a masculine noun: o peixe." } }
     ],
     quiz: [
-      { prompt: "How do you ask for the bill?", options: ["Um café, por favor", "A conta, por favor", "Onde fica?", "Bom apetite"], answer: "A conta, por favor" },
       { prompt: "What does 'água' mean?", options: ["bread", "water", "juice", "milk"], answer: "water" },
-      { prompt: "Which word means 'bread'?", options: ["queijo", "pão", "café", "sopa"], answer: "pão" }
+      { prompt: "Which word means 'bread'?", options: ["queijo", "pão", "café", "sopa"], answer: "pão" },
+      { prompt: "Which word means 'fish'?", options: ["arroz", "chá", "peixe", "leite"], answer: "peixe" }
     ],
   },
   {
