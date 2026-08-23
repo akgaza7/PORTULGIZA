@@ -161,7 +161,7 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
               ) : null}
             </>
           ) : null}
-          <p className="mt-1 text-sm font-semibold text-portugalGreen">{coreLabel}</p>
+          {lessonSlug === "greetings" ? null : <p className="mt-1 text-sm font-semibold text-portugalGreen">{coreLabel}</p>}
         </div>
         <button
           type="button"
