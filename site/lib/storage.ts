@@ -375,7 +375,7 @@ export function calculateCourseMastery(progress: AppProgress, lessonSlugs: reado
     stage: getMasteryStage(score),
     breakdown: {
       quiz: Math.round(quiz),
-      retention: Math.round(retention),
+      catchUp: Math.round(retention),
       practice: Math.round(practice),
       sentenceBuilding: Math.round(sentenceBuilding),
       completion: Math.round(completion),
