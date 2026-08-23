@@ -249,7 +249,7 @@ export default function DailyQuiz({ questionKeys, currentStreak, onComplete, onB
             style={{ backgroundColor: PT.gold, color: "#1a1000" }}
             data-testid="button-daily-done"
           >
-            {isPerfect ? "Keep going →" : "Back to Home"}
+            {isPerfect ? "Keep going →" : "Back"}
           </button>
         </div>
       </div>
