@@ -105,12 +105,12 @@ export function DashboardShell() {
           </Link>
           <Link
             href="/lesson/greetings?level=Advanced#translate-crisis-game"
-            className="rounded-[1.5rem] border border-portugalRed/20 bg-portugalRed/5 p-4 transition hover:-translate-y-0.5 hover:border-portugalRed/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalRed"
+            className="rounded-[1.5rem] border border-portugalGold/70 bg-portugalGold/20 p-4 transition hover:-translate-y-0.5 hover:border-portugalGold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
           >
-            <span className="inline-flex rounded-full bg-portugalRed px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
+            <span className="inline-flex rounded-full bg-portugalGold px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">
               STURDY
             </span>
-            <p className="mt-3 text-sm font-semibold text-portugalRed">Unlocks after SMOOTH</p>
+            <p className="mt-3 text-sm font-semibold text-black">Unlocks after SMOOTH</p>
           </Link>
         </div>
         <p className="mt-3 text-xs text-muted">Each level must be completed before another level opens.</p>
