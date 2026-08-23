@@ -136,7 +136,7 @@ export function DashboardShell() {
       <section id="learn" className="mt-14 scroll-mt-6 pb-6">
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
-            <h2 className="mt-2 font-display text-4xl font-bold tracking-tight text-portugalGreen sm:text-5xl">Start</h2>
+            <h2 className="mt-2 font-display text-4xl font-bold tracking-tight text-portugalGreen sm:text-5xl">START</h2>
           </div>
         </div>
 
