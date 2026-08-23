@@ -248,12 +248,7 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
             </div>
           ))}
         </div>
-      ) : (
-        <div className="mt-4 rounded-[1.25rem] border border-portugalGreen/15 bg-portugalGreen/5 p-4 text-center">
-          <p className="font-display text-xl font-bold text-ink">Your detailed progress will grow with you.</p>
-          <p className="mt-1 text-sm text-ink/60">Complete your first lesson to unlock detailed progress.</p>
-        </div>
-      )}
+      ) : null}
 
       {matchingScores.length ? (
         <section className="mt-4 rounded-[1.25rem] border border-portugalGold/35 bg-portugalGold/10 p-4" aria-labelledby="matching-scores-heading">
