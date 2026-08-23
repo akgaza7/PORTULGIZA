@@ -100,7 +100,7 @@ export const sentenceBanks: Record<Level, CurriculumSentence[]> = {
 
 const scenarioSets: Record<Level, ScenarioSeed[]> = {
   Beginner: [
-    { title: "Morning at the hotel", situation: "You enter your hotel reception in the morning and greet the receptionist.", answer: 0, options: [0, 1, 19] },
+    { title: "Morning at the hotel", situation: "You greet the hotel receptionist, what would you say?", answer: 0, options: [0, 1, 19] },
     { title: "Checking on someone", situation: "You politely ask a new person how they are.", answer: 2, options: [2, 7, 5] },
     { title: "Introducing yourself", situation: "You meet another traveller and want to tell them your name.", answer: 6, options: [9, 6, 2] },
     { title: "Asking for English", situation: "You need help and want to know whether the station employee speaks English.", answer: 9, options: [10, 12, 9] },
@@ -255,10 +255,8 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
       </div>
 
       <div className="p-6 sm:p-8">
-        <p className="eyebrow">Tourist situation</p>
-        <h4 className="mt-2 font-display text-2xl font-bold">{scenario.title}</h4>
-        <p className="mt-3 max-w-3xl leading-7 text-ink/65">{scenario.situation}</p>
-        <p className="mt-5 text-sm font-bold text-ink">Which learned sentence is the exact match?</p>
+        <h4 className="font-display text-2xl font-bold">Scenario</h4>
+        <p className="mt-2 max-w-3xl leading-7 text-ink/65">{scenario.situation}</p>
 
         <div className="mt-4 grid gap-3">
           {scenario.options.map((sentenceIndex, index) => {
