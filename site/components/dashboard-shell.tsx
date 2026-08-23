@@ -137,6 +137,9 @@ export function DashboardShell() {
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
             <h2 className="mt-2 font-display text-4xl font-bold tracking-tight text-portugalGreen sm:text-5xl">START</h2>
+            <p className="mt-2 text-sm text-ink/65 sm:text-base">
+              The lessons will involve you matching the correct words or numbers.
+            </p>
           </div>
         </div>
 
