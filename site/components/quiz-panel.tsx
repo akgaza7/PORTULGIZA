@@ -43,6 +43,15 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
     }
   };
 
+  const speakQuizOption = (question: QuizQuestion, option: string) => {
+    const audio = question.audioByOption?.[option];
+    speakEuropeanPortuguese(audio?.text ?? option, {
+      voiceGender: audio?.voiceGender,
+      rate: 0.9,
+      onStart: onListen
+    });
+  };
+
   const submitAnswer = () => {
     if (!selected) {
       return;
@@ -139,7 +148,17 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
                 {correctItems.map((item) => (
                   <li key={item.prompt} className="rounded-2xl bg-white p-3">
                     <p className="text-sm text-ink/55">{item.prompt}</p>
-                    <p className="mt-1 font-bold text-portugalGreen">{item.answer}</p>
+                    <button
+                      type="button"
+                      onClick={() => speakQuizOption(item, item.answer)}
+                      aria-label={`Hear ${item.answer} in European Portuguese`}
+                      title="Click to hear this in European Portuguese"
+                      data-portuguese-voice-managed="true"
+                      className="mt-1 inline-flex items-center gap-2 rounded-lg font-bold text-portugalGreen transition hover:bg-portugalGreen/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
+                    >
+                      <span lang="pt-PT">{item.answer}</span>
+                      <span aria-hidden="true">🔊</span>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -158,8 +177,30 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
                 {practiceItems.map((item) => (
                   <li key={item.prompt} className="rounded-2xl bg-white p-3">
                     <p className="text-sm text-ink/55">{item.prompt}</p>
-                    <p className="mt-1 font-bold text-portugalRed">Correct: {item.answer}</p>
-                    <p className="mt-1 text-xs text-ink/45">Your answer: {item.learnerAnswer}</p>
+                    <button
+                      type="button"
+                      onClick={() => speakQuizOption(item, item.answer)}
+                      aria-label={`Hear the correct answer ${item.answer} in European Portuguese`}
+                      title="Click to hear this in European Portuguese"
+                      data-portuguese-voice-managed="true"
+                      className="mt-1 inline-flex items-center gap-2 rounded-lg font-bold text-portugalRed transition hover:bg-portugalRed/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalRed"
+                    >
+                      <span>Correct:</span>
+                      <span lang="pt-PT">{item.answer}</span>
+                      <span aria-hidden="true">🔊</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => speakQuizOption(item, item.learnerAnswer)}
+                      aria-label={`Hear your answer ${item.learnerAnswer} in European Portuguese`}
+                      title="Click to hear this in European Portuguese"
+                      data-portuguese-voice-managed="true"
+                      className="mt-1 flex items-center gap-1 rounded-lg text-xs text-ink/45 transition hover:bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean"
+                    >
+                      <span>Your answer:</span>
+                      <span lang="pt-PT">{item.learnerAnswer}</span>
+                      <span aria-hidden="true">🔊</span>
+                    </button>
                   </li>
                 ))}
               </ul>
