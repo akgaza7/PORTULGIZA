@@ -253,18 +253,42 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
             <div>
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-ocean">English</p>
               <div className="flex flex-wrap gap-2">
-                {englishOrder.map((index) => matched.includes(index) ? null : (
-                  <button
-                    key={corePhrases[index].english}
-                    type="button"
-                    onClick={() => chooseEnglish(index)}
-                    disabled={incorrectPair !== null}
-                    aria-pressed={selectedEnglish === index}
-                    className={`min-h-11 rounded-full border px-4 py-2 text-sm font-bold transition ${selectedEnglish === index ? "border-ocean bg-ocean text-white" : "border-ocean/20 bg-ocean/5 text-ocean hover:bg-ocean/10"} ${incorrectPair?.englishIndex === index ? "match-error-shake border-portugalRed bg-portugalRed text-white" : ""}`}
-                  >
-                    {corePhrases[index].english}
-                  </button>
-                ))}
+                {englishOrder.map((index) => {
+                  if (matched.includes(index)) return null;
+
+                  const phrase = corePhrases[index];
+                  const genderAvatar = phrase.genderCue?.gender === "masculine"
+                    ? avatarDetails.male
+                    : phrase.genderCue?.gender === "feminine"
+                      ? avatarDetails.female
+                      : null;
+                  const englishLabel = phrase.english.replace(/\s*\((?:female|male) speaker\)\s*$/i, "");
+
+                  return (
+                    <button
+                      key={phrase.english}
+                      type="button"
+                      onClick={() => chooseEnglish(index)}
+                      disabled={incorrectPair !== null}
+                      aria-pressed={selectedEnglish === index}
+                      aria-label={genderAvatar ? `${englishLabel}. ${genderAvatar.name} indicates ${phrase.genderCue?.gender} grammar.` : englishLabel}
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition ${selectedEnglish === index ? "border-ocean bg-ocean text-white" : "border-ocean/20 bg-ocean/5 text-ocean hover:bg-ocean/10"} ${incorrectPair?.englishIndex === index ? "match-error-shake border-portugalRed bg-portugalRed text-white" : ""}`}
+                    >
+                      {genderAvatar ? (
+                        <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/80 bg-white">
+                          <Image
+                            src={genderAvatar.image}
+                            alt=""
+                            fill
+                            sizes="32px"
+                            className={`object-cover ${genderAvatar.imagePosition}`}
+                          />
+                        </span>
+                      ) : null}
+                      <span>{englishLabel}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
