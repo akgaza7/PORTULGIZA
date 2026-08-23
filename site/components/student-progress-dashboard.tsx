@@ -160,17 +160,16 @@ export function StudentProgressDashboard({ progress, subscriptionStatus }: Stude
         />
       </div>
 
-      <div>
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 id="student-progress-heading" className="font-display text-2xl font-bold sm:text-3xl">
           DASHBOARD
         </h2>
-      </div>
-
-      <div
-        className="mt-4 rounded-[1.5rem] bg-portugalGreen px-5 py-4 text-white"
-        aria-label={`Current learning level: ${learningLevel}`}
-      >
-        <p className="font-display text-2xl font-bold leading-none">{learningLevel}</p>
+        <div
+          className="rounded-full bg-portugalGreen px-5 py-3 text-white"
+          aria-label={`Current learning level: ${learningLevel}`}
+        >
+          <p className="font-display text-lg font-bold leading-none sm:text-xl">{learningLevel}</p>
+        </div>
       </div>
 
       <div ref={reviewPanelsRef} className="mt-4 grid items-start gap-3 md:grid-cols-2">
