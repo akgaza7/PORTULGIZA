@@ -6,12 +6,24 @@
   color-scheme: light;
 }
 
+html {
+  scroll-behavior: smooth;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+
 body {
-  @apply bg-sand text-ink antialiased;
+  @apply min-h-screen bg-sand text-ink antialiased;
   background-image:
-    radial-gradient(circle at top left, rgba(242, 198, 109, 0.22), transparent 22rem),
-    radial-gradient(circle at top right, rgba(32, 69, 51, 0.12), transparent 20rem),
-    linear-gradient(180deg, #fcfbf8 0%, #f6f3ec 100%);
+    radial-gradient(circle at 4% 4%, rgba(244, 185, 66, 0.24), transparent 26rem),
+    radial-gradient(circle at 96% 10%, rgba(148, 198, 215, 0.26), transparent 28rem),
+    linear-gradient(180deg, #fffdf8 0%, #f7f2e8 100%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 * {
@@ -20,9 +32,131 @@ body {
 }
 
 .card-surface {
-  @apply rounded-3xl border border-white/70 bg-white/80 shadow-soft backdrop-blur;
+  @apply rounded-[2rem] border border-white/80 bg-white/80 shadow-soft backdrop-blur-xl;
 }
 
 .page-shell {
-  @apply mx-auto w-full max-w-6xl px-4 pb-12 pt-6 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[90rem] px-4 pb-12 pt-4 sm:px-6 sm:pt-6 lg:px-8;
+}
+
+.hero-panel {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(244, 185, 66, 0.16), transparent 18rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 246, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 30px 80px rgba(24, 49, 38, 0.13);
+}
+
+.learning-page,
+.learning-page .font-display {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.2em] text-ocean/60;
+}
+
+.metric-card {
+  @apply flex min-h-44 flex-col justify-between rounded-[2rem] p-5 shadow-soft sm:min-h-52 sm:p-6;
+}
+
+.metric-label {
+  @apply text-[0.65rem] font-semibold uppercase tracking-[0.16em] sm:text-xs;
+}
+
+.metric-value {
+  @apply font-display text-4xl font-bold tracking-tight sm:text-5xl;
+}
+
+.metric-detail {
+  @apply text-xs leading-5 sm:text-sm;
+}
+
+@keyframes avatar-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+
+@keyframes avatar-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes avatar-greet {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  35% {
+    transform: translateY(-5px) rotate(-3deg);
+  }
+  70% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+
+@keyframes match-error-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-7px);
+  }
+  40%,
+  80% {
+    transform: translateX(7px);
+  }
+}
+
+.match-error-shake {
+  animation: match-error-shake 420ms ease-in-out;
+}
+
+.avatar-choice-portrait {
+  animation: avatar-idle 3.8s ease-in-out infinite;
+  transform-origin: 50% 85%;
+  will-change: transform;
+}
+
+.avatar-choice-option:nth-child(2) .avatar-choice-portrait {
+  animation-delay: -1.9s;
+}
+
+.avatar-choice-portrait img {
+  animation: avatar-breathe 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.avatar-choice-portrait--selected {
+  box-shadow: 0 0 0 3px rgba(0, 117, 71, 0.18);
+}
+
+.avatar-choice-option:hover .avatar-choice-portrait,
+.avatar-choice-option:focus-visible .avatar-choice-portrait {
+  animation: avatar-greet 700ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .match-error-shake,
+  .avatar-choice-portrait,
+  .avatar-choice-portrait img {
+    animation: none;
+  }
+}
+
+::selection {
+  background: rgba(244, 185, 66, 0.5);
+  color: #12211a;
 }

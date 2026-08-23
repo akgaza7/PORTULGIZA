@@ -8,12 +8,13 @@ export function generateStaticParams() {
   }));
 }
 
-export default function LessonPage({
+export default async function LessonPage({
   params
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const lesson = getLessonBySlug(params.slug);
+  const { slug } = await params;
+  const lesson = getLessonBySlug(slug);
 
   if (!lesson) {
     notFound();
