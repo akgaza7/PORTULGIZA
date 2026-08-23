@@ -146,9 +146,9 @@ const levelStyles: Record<Level, string> = {
 
 const learnedCounts: Record<Level, number> = { Beginner: 20, Intermediate: 40, Advanced: 60 };
 const levelLabels: Record<Level, string> = {
-  Beginner: "Start Here",
-  Intermediate: "Smooth",
-  Advanced: "Sturdy"
+  Beginner: "START",
+  Intermediate: "SMOOTH",
+  Advanced: "STURDY"
 };
 
 export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy }: TouristScenarioGameProps) {
