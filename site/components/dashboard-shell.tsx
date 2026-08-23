@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { AvatarChoice } from "@/components/avatar-choice";
 import { CoreWordMatch } from "@/components/greeting-word-match";
+import { GreetingResponseGuide } from "@/components/greeting-response-guide";
 import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
 import { lessons, type CategoryLesson } from "@/lib/lesson-data";
 import { markAnswerAttempt, markPracticeActivity, useProgressState } from "@/lib/storage";
@@ -37,7 +38,7 @@ const coreMatchLabels: Record<
 
 export function DashboardShell() {
   const { progress, setProgress, ready } = useProgressState();
-  const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | null>(null);
+  const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | null>(null);
   const lessonListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -156,7 +157,8 @@ export function DashboardShell() {
             const expanded = openLesson === lesson.slug;
             const panelId = `start-here-${lesson.slug}-lesson`;
             return (
-              <div key={lesson.slug} className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+              <Fragment key={lesson.slug}>
+              <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
                 <button
                   type="button"
                   aria-expanded={expanded}
@@ -204,6 +206,31 @@ export function DashboardShell() {
                   </div>
                 ) : null}
               </div>
+              {lesson.slug === "greetings" ? (
+                <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+                  <button
+                    type="button"
+                    aria-expanded={openLesson === "greeting-responses"}
+                    aria-controls="start-here-greeting-responses"
+                    onClick={() => setOpenLesson((current) => current === "greeting-responses" ? null : "greeting-responses")}
+                    className="flex min-h-20 w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-portugalGreen/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-portugalGreen sm:px-6"
+                  >
+                    <span className="font-display text-2xl font-bold text-portugalGreen sm:text-3xl">Respond to Greetings</span>
+                    <span
+                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border border-portugalGreen/20 bg-portugalGreen/10 text-xl font-bold text-portugalGreen transition-transform ${openLesson === "greeting-responses" ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    >
+                      ↓
+                    </span>
+                  </button>
+                  {openLesson === "greeting-responses" ? (
+                    <div id="start-here-greeting-responses" className="border-t border-portugalGreen/15 bg-sand/20 p-2 sm:p-3">
+                      <GreetingResponseGuide />
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+              </Fragment>
             );
           })}
         </div>
