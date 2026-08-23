@@ -81,9 +81,9 @@ export function DashboardShell() {
           />
         </section>
 
-        <section className="card-surface p-5 sm:p-6" aria-label="Course pathway">
+        <section className="card-surface p-5 sm:p-6" aria-label="Lessons">
         <div className="mb-5">
-          <p className="eyebrow">Course pathway</p>
+          <p className="eyebrow">Lessons</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
           <Link
