@@ -26,7 +26,8 @@ export function PortugueseVoiceLayer() {
     const voiceGender = avatar === "male" ? "masculine" : "feminine";
     const speakFromTarget = (target: EventTarget | null) => {
       if (!(target instanceof Element)) return;
-      const element = target.closest<HTMLElement>(selector);
+      const element = target.closest<HTMLElement>(selector)
+        ?? target.closest<HTMLElement>("button, a")?.querySelector<HTMLElement>(selector);
       if (!element || element.closest('[data-portuguese-voice-managed="true"]')) return;
 
       const text = element.textContent?.trim();

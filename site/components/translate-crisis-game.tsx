@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { speakEuropeanPortuguese } from "@/components/speech-button";
 
 type ScenarioAnswer = {
   prompt: string;
@@ -183,6 +184,7 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
 
   const chooseAnswer = (sentenceIndex: number) => {
     if (selected !== null) return;
+    speakEuropeanPortuguese(curriculum[sentenceIndex].portuguese, { rate: 0.9 });
     const correct = sentenceIndex === scenario.answer;
     setSelected(sentenceIndex);
     if (correct) setCorrectCount((current) => current + 1);
@@ -268,8 +270,11 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
               <button
                 key={`${level}-${scenarioIndex}-${sentenceIndex}`}
                 type="button"
+                lang="pt-PT"
+                data-portuguese-voice-managed="true"
                 disabled={selected !== null}
                 onClick={() => chooseAnswer(sentenceIndex)}
+                aria-label={`Hear and choose ${option.portuguese}`}
                 className={`flex gap-4 rounded-2xl border p-4 text-left transition ${
                   correctOption
                     ? "border-portugalGreen bg-portugalGreen/10 text-portugalGreen"
@@ -279,7 +284,7 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
                 }`}
               >
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink/5 text-sm font-bold">{index + 1}</span>
-                <span lang="pt-PT" className="pt-1 font-semibold leading-6">{option.portuguese}</span>
+                <span className="pt-1 font-semibold leading-6">{option.portuguese}</span>
               </button>
             );
           })}
