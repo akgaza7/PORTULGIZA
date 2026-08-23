@@ -8,7 +8,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -49,7 +49,7 @@ textarea {
 
 .learning-page,
 .learning-page .font-display {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  font-family: Arial, sans-serif;
 }
 
 .eyebrow {

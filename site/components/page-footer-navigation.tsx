@@ -22,7 +22,7 @@ export function PageFooterNavigation() {
           onClick={backToTop}
           className="rounded-full border border-ocean/20 bg-white px-5 py-3 text-sm font-semibold text-ocean transition hover:border-ocean hover:bg-sky/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean"
         >
-          ↑ Back to top
+          ↑ Page up
         </button>
 
         {!isHomePage ? (

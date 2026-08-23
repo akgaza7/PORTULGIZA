@@ -24,8 +24,8 @@ const config: Config = {
         soft: "0 20px 50px rgba(20, 46, 34, 0.1)"
       },
       fontFamily: {
-        sans: ["Palatino Linotype", "Book Antiqua", "Palatino", "Georgia", "serif"],
-        display: ["Palatino Linotype", "Book Antiqua", "Palatino", "Georgia", "serif"]
+        sans: ["Arial", "sans-serif"],
+        display: ["Arial", "sans-serif"]
       }
     }
   },
