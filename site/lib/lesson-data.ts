@@ -401,12 +401,22 @@ const beginnerLessonSeeds: LessonSeed[] = [
   })
 ];
 
-export const lessons: CategoryLesson[] = beginnerLessonSeeds.slice(0, 4).map((lesson, index) => ({
-  ...lesson,
-  quiz: createPhraseQuiz(lesson.phrases),
-  level: "beginner",
-  order: index + 1
-}));
+const startLessonSlugs = ["greetings", "food", "numbers", "travel"] as const;
+
+export const lessons: CategoryLesson[] = startLessonSlugs.map((slug, index) => {
+  const lesson = beginnerLessonSeeds.find((candidate) => candidate.slug === slug);
+
+  if (!lesson) {
+    throw new Error(`Missing Start lesson: ${slug}`);
+  }
+
+  return {
+    ...lesson,
+    quiz: createPhraseQuiz(lesson.phrases),
+    level: "beginner",
+    order: index + 1
+  };
+});
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
