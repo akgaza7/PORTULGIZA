@@ -57,18 +57,6 @@ export function DashboardShell() {
     <main className="page-shell">
       <div className="mb-6 flex items-center justify-end gap-3">
         <div className="flex items-center gap-3">
-          <div className="hidden items-center gap-2 text-sm text-ink/60 md:flex">
-            <span className="h-2 w-2 rounded-full bg-clay" />
-            <span>
-              {ready
-                ? progress.streak === 0
-                  ? "Not started"
-                  : progress.streak === 1
-                    ? "Started today"
-                    : `${progress.streak}-day streak`
-                : "–"}
-            </span>
-          </div>
           <Link
             href="/account"
             className="hidden rounded-full border border-ocean/15 bg-white px-4 py-2.5 text-sm font-semibold text-ocean transition hover:border-ocean/35 hover:text-ink sm:inline-flex"
