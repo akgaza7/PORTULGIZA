@@ -76,7 +76,8 @@ export function DashboardShell() {
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
           {access.canAccessStart ? (
             <Link
-              href="/lesson/greetings"
+              href="/#learn"
+              aria-label="Open the START lesson plan"
               className="rounded-[1.5rem] border border-portugalGreen/20 bg-portugalGreen/10 p-4 transition hover:-translate-y-0.5 hover:border-portugalGreen/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
             >
               <span className="inline-flex rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">START</span>
@@ -96,6 +97,7 @@ export function DashboardShell() {
           {access.canAccessSmooth ? (
             <Link
               href="/lesson/greetings?level=Intermediate#translate-crisis-game"
+              aria-label="Open the SMOOTH lesson plan"
               className="rounded-[1.5rem] border border-portugalBlue/20 bg-portugalBlue/5 p-4 transition hover:-translate-y-0.5 hover:border-portugalBlue/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalBlue"
             >
               <span className="inline-flex rounded-full bg-portugalBlue px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">SMOOTH</span>
@@ -111,6 +113,7 @@ export function DashboardShell() {
           {access.canAccessSturdy ? (
             <Link
               href="/lesson/greetings?level=Advanced#translate-crisis-game"
+              aria-label="Open the STURDY lesson plan"
               className="rounded-[1.5rem] border border-portugalGold bg-portugalGold p-4 text-black transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
             >
               <span className="inline-flex rounded-full border border-black/15 bg-white/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">STURDY</span>
