@@ -158,7 +158,7 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
           <p className="mt-4 rounded-xl bg-sand/70 px-3 py-2 text-sm text-ink/65" aria-live="polite">{feedback}</p>
           <p className="mt-4 text-sm font-semibold text-ink/70">Select a European Portuguese word, then choose its English meaning on the right.</p>
           <div className="mt-3 grid items-start gap-4 lg:grid-cols-2">
-            <section className="rounded-2xl border border-portugalGreen/20 bg-portugalGreen/5 p-4" aria-label="European Portuguese words">
+            <section className="rounded-[1.5rem] border-2 border-portugalGreen/35 bg-[#F7FBF8] p-4 shadow-sm" aria-label="European Portuguese words">
               <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-portugalGreen">European Portuguese words</h3>
               <div className="grid gap-2 sm:grid-cols-2">
                 {corePhrases.map((phrase, index) => {
@@ -194,7 +194,7 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
               </div>
             </section>
 
-            <section className="rounded-2xl border border-ocean/20 bg-ocean/5 p-4" aria-label="English words">
+            <section className="rounded-[1.5rem] border-2 border-ocean/30 bg-[#F5F8FB] p-4 shadow-sm" aria-label="English words">
               <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-ocean">English words</h3>
               <div className="grid gap-2 sm:grid-cols-2">
                 {englishOrder.map((index) => {
