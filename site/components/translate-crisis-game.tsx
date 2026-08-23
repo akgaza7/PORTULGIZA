@@ -234,17 +234,17 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
                 disabled={locked}
                 aria-pressed={level === levelOption}
                 aria-label={`${levelLabels[levelOption]}${locked ? " locked — pass START and subscribe to unlock" : ""}`}
-                className={`rounded-2xl border px-4 py-3 text-left transition ${locked
-                  ? "cursor-not-allowed border-white/10 bg-white/[0.03] text-white/45"
+                className={`rounded-2xl border bg-[#f3e4cf] px-4 py-3 text-left uppercase text-ink transition ${locked
+                  ? "cursor-not-allowed border-[#d8c6ae] opacity-55"
                   : level === levelOption
-                    ? levelStyles[levelOption]
-                    : "border-white/15 bg-white/5 text-white hover:bg-white/10"}`}
+                    ? "border-[#d6aa67] ring-2 ring-[#e2bd82]"
+                    : "border-[#d8c6ae] hover:bg-[#ead8bf]"}`}
               >
                 <span className="flex items-center justify-between gap-2 text-sm font-bold">
                   {levelLabels[levelOption]}
                   {locked ? <span aria-hidden="true">🔒</span> : null}
                 </span>
-                <span className={`mt-1 block text-xs ${locked ? "text-white/40" : level === levelOption ? "text-white/75" : "text-white/50"}`}>
+                <span className="mt-1 block text-xs text-ink/65">
                   {locked ? "Pass START and subscribe to unlock" : `${learnedCounts[levelOption]} sentences learned`}
                 </span>
               </button>
