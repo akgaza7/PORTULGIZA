@@ -110,8 +110,7 @@ export function DashboardShell() {
             <span className="inline-flex rounded-full bg-portugalBlue px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
               Smooth
             </span>
-            <p className="mt-3 text-sm font-semibold text-portugalBlue">Unlocks after Start Here</p>
-            <span className="mt-3 inline-flex text-xs font-bold uppercase tracking-[0.12em] text-portugalBlue">Open Smooth →</span>
+            <p className="mt-3 text-sm font-semibold text-portugalBlue">Unlocks after START</p>
           </Link>
           <Link
             href="/lesson/greetings?level=Advanced#translate-crisis-game"
