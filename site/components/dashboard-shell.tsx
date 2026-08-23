@@ -219,7 +219,7 @@ export function DashboardShell() {
                     onClick={() => setOpenLesson((current) => current === "greeting-responses" ? null : "greeting-responses")}
                     className="flex min-h-20 w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-portugalGreen/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-portugalGreen sm:px-6"
                   >
-                    <span className="font-display text-2xl font-bold text-portugalGreen sm:text-3xl">Respond to Greetings</span>
+                    <span className="font-display text-2xl font-bold text-portugalGreen sm:text-3xl">Reply to Greetings</span>
                     <span
                       className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border border-portugalGreen/20 bg-portugalGreen/10 text-xl font-bold text-portugalGreen transition-transform ${openLesson === "greeting-responses" ? "rotate-180" : ""}`}
                       aria-hidden="true"
