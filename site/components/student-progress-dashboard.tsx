@@ -135,21 +135,6 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
   const reviewPanelsRef = useRef<HTMLDivElement>(null);
   const mastery = calculateCourseMastery(progress, lessons.map((lesson) => lesson.slug));
   const answers = getAnswerReview(progress);
-  const reviewedAnswers = [...answers.correct, ...answers.needsPractice];
-  const matchingScores = lessons.flatMap((lesson) => {
-    const lessonMatches = reviewedAnswers.filter(
-      (answer) => answer.lessonSlug === lesson.slug && answer.activity === "flashcard" && answer.prompt.startsWith("Match “")
-    );
-
-    return lessonMatches.length
-      ? [{
-          lessonTitle: lesson.title,
-          correct: lessonMatches.filter((answer) => answer.correct).length,
-          total: lessonMatches.length,
-          needsPractice: lessonMatches.filter((answer) => !answer.correct).length
-        }]
-      : [];
-  });
   const hasDetailedProgress = ready && answers.correct.length + answers.needsPractice.length > 0;
   useEffect(() => {
     if (!openReview) return;
@@ -209,25 +194,6 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
             </div>
           ))}
         </div>
-      ) : null}
-
-      {matchingScores.length ? (
-        <section className="mt-4 rounded-[1.25rem] border border-portugalGold/35 bg-portugalGold/10 p-4" aria-labelledby="matching-scores-heading">
-          <p id="matching-scores-heading" className="text-xs font-bold uppercase tracking-[0.16em] text-ink/60">
-            First-attempt word matching
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {matchingScores.map((score) => (
-              <div key={score.lessonTitle} className="rounded-2xl border border-portugalGold/30 bg-white/75 px-4 py-3">
-                <p className="text-xs font-semibold text-ink/55">{score.lessonTitle} matching</p>
-                <p className="mt-1 font-display text-2xl font-bold text-ink">{score.correct}/{score.total}</p>
-                <p className="mt-1 text-xs font-semibold text-portugalRed">
-                  {score.needsPractice} {score.needsPractice === 1 ? "word" : "words"} to practise
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
       ) : null}
 
       <div ref={reviewPanelsRef} className="mt-4 grid items-start gap-3 md:grid-cols-2">

@@ -307,6 +307,26 @@ function retentionScore(record?: LessonRecord) {
   return record.bestScore * Math.min(reviewDays / 2, 1);
 }
 
+function wordMatchingRetentionScore(progress: AppProgress, lessonSlugs: readonly string[]) {
+  const latestMatchByPrompt = new Map<string, LearningAnswer>();
+
+  for (const answer of (progress.answerHistory ?? []).filter(isCurrentLearningAnswer)) {
+    if (
+      lessonSlugs.includes(answer.lessonSlug) &&
+      answer.activity === "flashcard" &&
+      answer.prompt.startsWith("Match “")
+    ) {
+      latestMatchByPrompt.set(`${answer.lessonSlug}:${answer.prompt}`, answer);
+    }
+  }
+
+  const firstAttempts = Array.from(latestMatchByPrompt.values());
+  if (!firstAttempts.length) return 0;
+
+  const correct = firstAttempts.filter((answer) => answer.correct).length;
+  return Math.round((correct / firstAttempts.length) * 100);
+}
+
 export function calculateLessonMastery(progress: AppProgress, slug: string) {
   const record = progress.completedLessons[slug];
   const quiz = record?.bestScore ?? 0;
@@ -334,7 +354,7 @@ export function calculateCourseMastery(progress: AppProgress, lessonSlugs: reado
   const average = (values: number[]) =>
     values.length ? values.reduce((total, value) => total + value, 0) / values.length : 0;
   const quiz = average(lessonSlugs.map((slug) => progress.completedLessons[slug]?.bestScore ?? 0));
-  const retention = average(lessonSlugs.map((slug) => retentionScore(progress.completedLessons[slug])));
+  const retention = wordMatchingRetentionScore(progress, lessonSlugs);
   const practice = average(lessonSlugs.map((slug) => practiceScore(progress.practiceByLesson[slug])));
   const sentenceBuilding = average(
     lessonSlugs.map((slug) => sentenceBuildingScore(progress.practiceByLesson[slug]))
