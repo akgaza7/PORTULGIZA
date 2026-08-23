@@ -151,7 +151,6 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
       : [];
   });
   const hasDetailedProgress = ready && answers.correct.length + answers.needsPractice.length > 0;
-  const nextLesson = lessons.find((lesson) => !progress.completedLessons[lesson.slug]?.completed) ?? lessons[0];
   useEffect(() => {
     if (!openReview) return;
 
@@ -187,15 +186,10 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
         </span>
       </div>
 
-      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+      <div className="mt-4">
         <div className="rounded-[1.25rem] bg-portugalGreen p-3 text-white">
           <p className="metric-label text-white/75">Progress level</p>
           <p className="mt-2 font-display text-xl font-bold leading-snug">{ready ? mastery.score : 0}/100</p>
-        </div>
-        <div className="relative overflow-hidden rounded-[1.25rem] border border-ink/10 bg-sand/65 p-3 text-ink">
-          <span className="absolute right-3 top-3 h-3 w-3 rounded-full bg-portugalGold" aria-hidden="true" />
-          <p className="metric-label text-ink/65">Next lesson</p>
-          <p className="mt-2 font-display text-xl font-bold leading-snug">{nextLesson.title}</p>
         </div>
       </div>
 
