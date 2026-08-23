@@ -7,6 +7,7 @@ import { AvatarChoice } from "@/components/avatar-choice";
 import { CoreWordMatch } from "@/components/greeting-word-match";
 import { GreetingResponseGuide } from "@/components/greeting-response-guide";
 import { GreetingVocabularyGuide } from "@/components/greeting-vocabulary-guide";
+import { NumbersInSentences } from "@/components/numbers-in-sentences";
 import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
 import { lessons, type CategoryLesson } from "@/lib/lesson-data";
 import { markAnswerAttempt, markPracticeActivity, useProgressState } from "@/lib/storage";
@@ -39,7 +40,7 @@ const coreMatchLabels: Record<
 
 export function DashboardShell() {
   const { progress, setProgress, ready } = useProgressState();
-  const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | null>(null);
+  const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | "numbers-in-sentences" | null>(null);
   const lessonListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -230,6 +231,40 @@ export function DashboardShell() {
                   {openLesson === "greeting-responses" ? (
                     <div id="start-here-greeting-responses" className="border-t border-portugalGreen/15 bg-sand/20 p-2 sm:p-3">
                       <GreetingResponseGuide />
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+              {lesson.slug === "numbers" ? (
+                <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+                  <button
+                    type="button"
+                    aria-expanded={openLesson === "numbers-in-sentences"}
+                    aria-controls="start-here-numbers-in-sentences"
+                    onClick={() => setOpenLesson((current) => current === "numbers-in-sentences" ? null : "numbers-in-sentences")}
+                    className="flex min-h-20 w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-portugalGreen/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-portugalGreen sm:px-6"
+                  >
+                    <span className="font-display text-2xl font-bold text-portugalGreen sm:text-3xl">Numbers in sentences</span>
+                    <span
+                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border border-portugalGreen/20 bg-portugalGreen/10 text-xl font-bold text-portugalGreen transition-transform ${openLesson === "numbers-in-sentences" ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    >
+                      ↓
+                    </span>
+                  </button>
+                  {openLesson === "numbers-in-sentences" ? (
+                    <div id="start-here-numbers-in-sentences" className="border-t border-portugalGreen/15 bg-sand/20 p-2 sm:p-3">
+                      <NumbersInSentences
+                        onAttempt={(question, learnerAnswer, correct) => setProgress((current) => markAnswerAttempt(current, {
+                          lessonSlug: "numbers",
+                          activity: "sentenceBuilder",
+                          prompt: question.prompt,
+                          correctAnswer: question.answer,
+                          learnerAnswer,
+                          correct
+                        }))}
+                        onComplete={() => setProgress((current) => markPracticeActivity(current, "numbers", "phraseBuilder"))}
+                      />
                     </div>
                   ) : null}
                 </div>
