@@ -200,14 +200,9 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p lang="pt-PT" className="eyebrow">O meu progresso</p>
-          <p className="mt-1 text-xs font-semibold text-ink/45">My progress</p>
-          <h2 id="student-progress-heading" className="mt-1 font-display text-2xl font-bold sm:text-3xl">
-            <span lang="pt-PT">Continue a aprender português</span>
+          <h2 id="student-progress-heading" className="font-display text-2xl font-bold sm:text-3xl">
+            DASHBOARD
           </h2>
-          <p className="mt-1 max-w-2xl text-sm leading-5 text-ink/60">
-            Continue learning Portuguese. Your progress is based on the exact words and sentences from your latest attempts.
-          </p>
           <Link
             href={`/lesson/${nextLesson.slug}`}
             className="mt-3 inline-flex min-h-11 items-center rounded-full bg-portugalGreen px-5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
