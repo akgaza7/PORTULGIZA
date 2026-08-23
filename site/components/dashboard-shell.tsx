@@ -134,24 +134,26 @@ export function DashboardShell() {
       <StudentProgressDashboard progress={progress} ready={ready} />
 
       <section className="card-surface mt-6 p-5 sm:p-7" aria-labelledby="daily-recall-heading">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h2 id="daily-recall-heading" className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            Your daily recall
-          </h2>
-          <button
-            type="button"
-            disabled
-            className="w-fit cursor-not-allowed rounded-full bg-portugalGold/30 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-ink/70"
+        <h2 id="daily-recall-heading" className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+          Daily learning catch-ups
+        </h2>
+        <p className="mt-4 max-w-5xl leading-7 text-ink/65">Daily learning catch-ups will be emailed to you.</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label="Daily learning catch-up preference">
+          <Link
+            href="/sign-up?reminder=yes#daily-learning-preference"
+            className="flex items-center gap-3 rounded-2xl border border-portugalGreen/30 bg-portugalGreen/5 p-4 font-semibold text-portugalGreen transition hover:border-portugalGreen hover:bg-portugalGreen/10"
           >
-            Delivery setup in progress
-          </button>
+            <span className="flex h-5 w-5 items-center justify-center rounded border border-portugalGreen" aria-hidden="true" />
+            Opt in
+          </Link>
+          <Link
+            href="/sign-up?reminder=no#daily-learning-preference"
+            className="flex items-center gap-3 rounded-2xl border border-ocean/20 bg-white p-4 font-semibold text-ocean transition hover:border-ocean hover:bg-sky/10"
+          >
+            <span className="flex h-5 w-5 items-center justify-center rounded border border-ocean/40" aria-hidden="true" />
+            Opt out
+          </Link>
         </div>
-        <p className="mt-4 max-w-5xl leading-7 text-ink/65">
-          Subscribers will receive one Portuguese-only prompt each day. Portulgiza will repeat phrases you answered incorrectly first, then revisit other phrases you have already learned—never unfamiliar words.
-        </p>
-        <p className="mt-3 text-sm font-semibold leading-6 text-portugalGreen">
-          Trial customers can receive this by email for 14 days. It continues while a paid subscription is active and can be switched off at any time.
-        </p>
       </section>
 
       <section id="learn" className="mt-14 scroll-mt-6 pb-6">

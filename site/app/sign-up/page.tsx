@@ -2,7 +2,14 @@ import Link from "next/link";
 import { AuthForm } from "@/components/auth-form";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
-export default function SignUpPage() {
+type SignUpPageProps = {
+  searchParams: Promise<{ reminder?: string }>;
+};
+
+export default async function SignUpPage({ searchParams }: SignUpPageProps) {
+  const { reminder } = await searchParams;
+  const initialReminderChoice = reminder === "yes" || reminder === "no" ? reminder : "";
+
   return (
     <main className="page-shell py-10 sm:py-16">
       <Link href="/" className="text-sm font-semibold text-ocean hover:text-ink">← Back</Link>
@@ -18,7 +25,9 @@ export default function SignUpPage() {
           We&apos;ll send your daily prompts to your email address.
         </p>
       </section>
-      <div className="mt-8"><AuthForm mode="sign-up" configured={isSupabaseConfigured()} /></div>
+      <div className="mt-8">
+        <AuthForm mode="sign-up" configured={isSupabaseConfigured()} initialReminderChoice={initialReminderChoice} />
+      </div>
     </main>
   );
 }

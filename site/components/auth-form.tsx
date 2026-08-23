@@ -8,13 +8,14 @@ import { createClient } from "@/lib/supabase/client";
 type AuthFormProps = {
   mode: "sign-in" | "sign-up";
   configured: boolean;
+  initialReminderChoice?: "yes" | "no" | "";
 };
 
-export function AuthForm({ mode, configured }: AuthFormProps) {
+export function AuthForm({ mode, configured, initialReminderChoice = "" }: AuthFormProps) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [reminderChoice, setReminderChoice] = useState<"yes" | "no" | "">("");
+  const [reminderChoice, setReminderChoice] = useState<"yes" | "no" | "">(initialReminderChoice);
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const isSignUp = mode === "sign-up";
@@ -108,7 +109,7 @@ export function AuthForm({ mode, configured }: AuthFormProps) {
             />
           </label>
           {isSignUp ? (
-            <fieldset className="space-y-3" aria-required="true">
+            <fieldset id="daily-learning-preference" className="scroll-mt-6 space-y-3" aria-required="true">
               <legend className="text-sm font-semibold text-ink">
                 Choose your daily learning prompt preference
               </legend>
