@@ -48,12 +48,6 @@ export default function RootLayout({
                 Dashboard
               </Link>
               <Link
-                href="/#learn"
-                className="rounded-full border border-portugalBlue/25 bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-portugalBlue transition hover:border-portugalBlue hover:bg-portugalBlue/5 sm:px-5 sm:text-sm"
-              >
-                Learn
-              </Link>
-              <Link
                 href="/sign-up"
                 className="inline-flex flex-col items-center rounded-full border border-portugalGold/60 bg-portugalGold/35 px-4 py-2 text-xs font-bold uppercase leading-tight tracking-[0.1em] text-black transition hover:bg-portugalGold/55 sm:px-5 sm:text-sm"
               >
