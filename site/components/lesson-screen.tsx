@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { AvatarChoice } from "@/components/avatar-choice";
 import { Flashcards } from "@/components/flashcards";
 import { GenderCoach, GenderedPhrase } from "@/components/gender-coach";
 import { ListeningMatch } from "@/components/listening-match";
@@ -59,10 +58,6 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
       <Link href="/" className="text-sm font-semibold text-portugalGreen transition hover:text-ink">
         ← Back to home
       </Link>
-
-      <div className="mt-4">
-        <AvatarChoice compact />
-      </div>
 
       <div className="mt-4">
         <StudentProgressDashboard progress={progress} ready={ready} />

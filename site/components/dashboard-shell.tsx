@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import { AvatarChoice } from "@/components/avatar-choice";
 import { CoreWordMatch } from "@/components/greeting-word-match";
 import { FoodConversationGuide } from "@/components/food-conversation-guide";
 import { GreetingResponseGuide } from "@/components/greeting-response-guide";
@@ -126,10 +125,6 @@ export function DashboardShell() {
           </Link>
         </div>
       </section>
-
-      <div className="mb-6">
-        <AvatarChoice />
-      </div>
 
       <StudentProgressDashboard progress={progress} ready={ready} />
 

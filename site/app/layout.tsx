@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AvatarChoice } from "@/components/avatar-choice";
 import { PageFooterNavigation } from "@/components/page-footer-navigation";
 import { PortugueseVoiceLayer } from "@/components/portuguese-voice-layer";
 import "./globals.css";
@@ -62,9 +63,15 @@ export default function RootLayout({
               </Link>
             </div>
           </nav>
-          <p className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            A little every day
-          </p>
+          <div className="mt-4 grid items-center gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+            <p className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              A little every day
+            </p>
+            <div className="lg:justify-self-center">
+              <AvatarChoice compact />
+            </div>
+            <div className="hidden lg:block" aria-hidden="true" />
+          </div>
         </header>
         <div className="flex-1">{children}</div>
         <PageFooterNavigation />

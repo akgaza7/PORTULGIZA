@@ -9,15 +9,9 @@ type AvatarChoiceProps = {
 
 const avatarOptions: AvatarPreference[] = ["female", "male"];
 
-const genderGuidance: Record<AvatarPreference, { heading: string; description: string }> = {
-  female: {
-    heading: "Feminine forms",
-    description: "Inês helps you recognise feminine words."
-  },
-  male: {
-    heading: "Masculine forms",
-    description: "Tiago helps you recognise masculine words."
-  }
+const genderGuidance: Record<AvatarPreference, string> = {
+  female: "Inês guides feminine words",
+  male: "Tiago guides masculine words"
 };
 
 export function AvatarChoice({ compact = false }: AvatarChoiceProps) {
@@ -62,12 +56,8 @@ export function AvatarChoice({ compact = false }: AvatarChoiceProps) {
                 </span>
                 <span>
                   <span className="block text-sm font-bold text-ink">{details.name}</span>
-                  <span className="block text-xs text-ink/55">{details.label}</span>
                   <span className={`mt-1 block text-xs font-bold ${option === "female" ? "text-portugalRed" : "text-ocean"}`}>
-                    {guidance.heading}
-                  </span>
-                  <span className="mt-0.5 block max-w-44 text-[0.7rem] leading-4 text-ink/60">
-                    {guidance.description}
+                    {guidance}
                   </span>
                 </span>
                 <span className={`ml-auto grid h-5 w-5 place-items-center rounded-full border text-xs ${selected ? "border-portugalGreen bg-portugalGreen text-white" : "border-ink/20 text-transparent"}`} aria-hidden="true">
@@ -77,7 +67,7 @@ export function AvatarChoice({ compact = false }: AvatarChoiceProps) {
             );
           })}
         </div>
-
+        <p className="text-xs font-medium text-ink/60">You will see them during your lessons.</p>
       </div>
     </section>
   );
