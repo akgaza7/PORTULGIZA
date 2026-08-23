@@ -166,9 +166,11 @@ export function StudentProgressDashboard({ progress, subscriptionStatus }: Stude
         </h2>
       </div>
 
-      <div className="mt-4 border-l-4 border-portugalGreen pl-4">
-        <p className="metric-label text-ink/55">Learning level</p>
-        <p className="mt-1 font-display text-2xl font-bold leading-snug text-portugalGreen">{learningLevel}</p>
+      <div
+        className="mt-4 rounded-[1.5rem] bg-portugalGreen px-5 py-4 text-white"
+        aria-label={`Current learning level: ${learningLevel}`}
+      >
+        <p className="font-display text-2xl font-bold leading-none">{learningLevel}</p>
       </div>
 
       <div ref={reviewPanelsRef} className="mt-4 grid items-start gap-3 md:grid-cols-2">
