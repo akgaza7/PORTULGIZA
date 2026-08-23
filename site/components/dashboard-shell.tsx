@@ -159,7 +159,6 @@ export function DashboardShell() {
       <section id="learn" className="mt-14 scroll-mt-6 pb-6">
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
-            <p className="eyebrow">Start Here lessons</p>
             <h2 className="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">Start</h2>
           </div>
           <p className="max-w-md text-sm leading-6 text-ink/50 sm:text-right">
