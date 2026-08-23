@@ -22,7 +22,23 @@ type NumbersInSentencesProps = {
   onComplete: () => void;
 };
 
-const vocabulary: SpokenPhrase[] = [
+const sentenceWords: SpokenPhrase[] = [
+  { portuguese: "Queria", english: "I would like" },
+  { portuguese: "café", english: "coffee", gender: "masculine" },
+  { portuguese: "água", english: "water", gender: "feminine" },
+  { portuguese: "cerveja", english: "beer", gender: "feminine" },
+  { portuguese: "imperial", english: "small draught beer", gender: "feminine" },
+  { portuguese: "pastel de nata", english: "custard tart", gender: "masculine" },
+  { portuguese: "pão", english: "bread roll", gender: "masculine" },
+  { portuguese: "papo-seco", english: "bread roll", gender: "masculine" },
+  { portuguese: "maçã", english: "apple", gender: "feminine" },
+  { portuguese: "mesa", english: "table", gender: "feminine" },
+  { portuguese: "para", english: "for" },
+  { portuguese: "por favor", english: "please" },
+  { portuguese: "Quanto custa?", english: "How much does it cost?" }
+];
+
+const quantityExamples: SpokenPhrase[] = [
   { portuguese: "um café", english: "one coffee", gender: "masculine" },
   { portuguese: "uma água", english: "one water", gender: "feminine" },
   { portuguese: "dois cafés", english: "two coffees", gender: "masculine" },
@@ -86,6 +102,7 @@ function AudioPhrase({ phrase }: { phrase: SpokenPhrase }) {
 }
 
 export function NumbersInSentences({ onAttempt, onComplete }: NumbersInSentencesProps) {
+  const [unlockedStage, setUnlockedStage] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
@@ -119,7 +136,24 @@ export function NumbersInSentences({ onAttempt, onComplete }: NumbersInSentences
     <div className="space-y-3">
       <details className="group overflow-hidden rounded-[1.35rem] border border-portugalGreen/15 bg-white">
         <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-bold text-ink marker:content-none sm:px-5">
-          <span>1. Learn the number changes</span>
+          <span>1. Learn every word first</span>
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-portugalGreen/10 text-portugalGreen transition-transform group-open:rotate-180" aria-hidden="true">↓</span>
+        </summary>
+        <div className="border-t border-portugalGreen/10 bg-sand/20 p-4 sm:p-5">
+          <p className="text-sm leading-6 text-ink/70 sm:text-base">Learn these words before they appear in a sentence. Click every Portuguese word to hear it.</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {sentenceWords.map((phrase) => <AudioPhrase key={phrase.portuguese} phrase={phrase} />)}
+          </div>
+          <button type="button" onClick={() => setUnlockedStage((current) => Math.max(current, 2))} className="mt-4 rounded-full bg-portugalGreen px-5 py-3 font-bold text-white">
+            Continue to number changes
+          </button>
+        </div>
+      </details>
+
+      {unlockedStage >= 2 ? (
+      <details className="group overflow-hidden rounded-[1.35rem] border border-portugalGreen/15 bg-white">
+        <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-bold text-ink marker:content-none sm:px-5">
+          <span>2. Combine numbers and words</span>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-portugalGreen/10 text-portugalGreen transition-transform group-open:rotate-180" aria-hidden="true">↓</span>
         </summary>
         <div className="border-t border-portugalGreen/10 bg-sand/20 p-4 sm:p-5">
@@ -127,27 +161,37 @@ export function NumbersInSentences({ onAttempt, onComplete }: NumbersInSentences
             <strong>Um</strong> and <strong>dois</strong> are used with masculine words. They change to <strong>uma</strong> and <strong>duas</strong> with feminine words.
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {vocabulary.map((phrase) => <AudioPhrase key={phrase.portuguese} phrase={phrase} />)}
+            {quantityExamples.map((phrase) => <AudioPhrase key={phrase.portuguese} phrase={phrase} />)}
           </div>
+          <button type="button" onClick={() => setUnlockedStage((current) => Math.max(current, 3))} className="mt-4 rounded-full bg-portugalGreen px-5 py-3 font-bold text-white">
+            Continue to sentences
+          </button>
         </div>
       </details>
+      ) : null}
 
+      {unlockedStage >= 3 ? (
       <details className="group overflow-hidden rounded-[1.35rem] border border-portugalGreen/15 bg-white">
         <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-bold text-ink marker:content-none sm:px-5">
-          <span>2. Hear numbers in sentences</span>
+          <span>3. Hear numbers in sentences</span>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-portugalGreen/10 text-portugalGreen transition-transform group-open:rotate-180" aria-hidden="true">↓</span>
         </summary>
         <div className="border-t border-portugalGreen/10 bg-sand/20 p-4 sm:p-5">
-          <p className="mb-4 text-sm text-ink/70 sm:text-base">Click each Portuguese sentence to hear it at a steady learning speed.</p>
+          <p className="mb-4 text-sm text-ink/70 sm:text-base">Now listen to the words combined into complete sentences.</p>
           <div className="grid gap-3 sm:grid-cols-2">
             {sentenceExamples.map((phrase) => <AudioPhrase key={phrase.portuguese} phrase={phrase} />)}
           </div>
+          <button type="button" onClick={() => setUnlockedStage((current) => Math.max(current, 4))} className="mt-4 rounded-full bg-portugalGreen px-5 py-3 font-bold text-white">
+            Start the sentence check
+          </button>
         </div>
       </details>
+      ) : null}
 
+      {unlockedStage >= 4 ? (
       <details className="group overflow-hidden rounded-[1.35rem] border border-portugalGreen/15 bg-white">
         <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-bold text-ink marker:content-none sm:px-5">
-          <span>3. Check the sentence</span>
+          <span>4. Check the sentence</span>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-portugalGreen/10 text-portugalGreen transition-transform group-open:rotate-180" aria-hidden="true">↓</span>
         </summary>
         <div className="border-t border-portugalGreen/10 bg-sand/20 p-4 sm:p-5">
@@ -200,6 +244,7 @@ export function NumbersInSentences({ onAttempt, onComplete }: NumbersInSentences
           )}
         </div>
       </details>
+      ) : null}
     </div>
   );
 }
