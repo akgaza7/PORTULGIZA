@@ -100,10 +100,8 @@ export function DashboardShell() {
             className="rounded-[1.5rem] border border-portugalGreen/20 bg-portugalGreen/10 p-4 transition hover:-translate-y-0.5 hover:border-portugalGreen/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
           >
             <span className="inline-flex rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
-              Start Here
+              Start
             </span>
-            <p className="mt-3 text-sm font-semibold text-portugalGreen">Active learning level</p>
-            <span className="mt-3 inline-flex text-xs font-bold uppercase tracking-[0.12em] text-portugalGreen">Open Start Here →</span>
           </Link>
           <Link
             href="/lesson/greetings?level=Intermediate#translate-crisis-game"
