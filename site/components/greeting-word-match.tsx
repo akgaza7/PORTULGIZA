@@ -166,9 +166,9 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
         <button
           type="button"
           onClick={handleReview}
-          className="min-h-11 rounded-full bg-ocean px-5 py-2 text-sm font-bold text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean"
+          className="min-h-11 rounded-full bg-[#F8E7D4] px-5 py-2 text-sm font-bold text-black transition hover:bg-[#F1D7BB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
-          {showReview ? (complete ? "Start again" : "Continue matching") : "Check the words"}
+          {showReview ? (complete ? "Start again" : "Continue matching") : "Words Translated"}
         </button>
       </div>
 
