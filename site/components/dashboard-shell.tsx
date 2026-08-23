@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useState } from "react";
 import { AvatarChoice } from "@/components/avatar-choice";
 import { CoreWordMatch } from "@/components/greeting-word-match";
 import { GreetingResponseGuide } from "@/components/greeting-response-guide";
@@ -41,20 +41,6 @@ const coreMatchLabels: Record<
 export function DashboardShell() {
   const { progress, setProgress, ready } = useProgressState();
   const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | "numbers-in-sentences" | null>(null);
-  const lessonListRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!openLesson) return;
-
-    const closeWhenClickingAway = (event: PointerEvent) => {
-      if (!lessonListRef.current?.contains(event.target as Node)) {
-        setOpenLesson(null);
-      }
-    };
-
-    document.addEventListener("pointerdown", closeWhenClickingAway);
-    return () => document.removeEventListener("pointerdown", closeWhenClickingAway);
-  }, [openLesson]);
 
   return (
     <main className="page-shell">
@@ -153,7 +139,7 @@ export function DashboardShell() {
           </div>
         </div>
 
-        <div ref={lessonListRef} className="grid gap-3">
+        <div className="grid gap-3">
           {lessons.map((lesson) => {
             const labels = coreMatchLabels[lesson.slug];
             const expanded = openLesson === lesson.slug;
