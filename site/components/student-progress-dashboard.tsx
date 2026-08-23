@@ -133,7 +133,8 @@ export function StudentProgressDashboard({ progress, subscriptionStatus }: Stude
   const [openReview, setOpenReview] = useState<"correct" | "practice" | null>(null);
   const reviewPanelsRef = useRef<HTMLDivElement>(null);
   const answers = getAnswerReview(progress);
-  const learningLevel = subscriptionStatus === "active" ? "STURDY" : "START";
+  const startPassed = lessons.every((lesson) => progress.completedLessons[lesson.slug]?.completed === true);
+  const learningLevel = subscriptionStatus === "active" && startPassed ? "STURDY" : "START";
   useEffect(() => {
     if (!openReview) return;
 

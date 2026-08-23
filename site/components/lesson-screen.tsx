@@ -10,6 +10,7 @@ import { SpeechButton } from "@/components/speech-button";
 import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
 import { SupermarketRoleplay } from "@/components/supermarket-roleplay";
 import { TranslateCrisisGame } from "@/components/translate-crisis-game";
+import { getLearningAccess } from "@/lib/learning-access";
 import type { CategoryLesson } from "@/lib/lesson-data";
 import {
   calculateLessonProgress,
@@ -31,9 +32,10 @@ const lessonColours = {
 };
 
 export function LessonScreen({ lesson }: LessonScreenProps) {
-  const { progress, setProgress, ready, subscriptionStatus } = useProgressState();
+  const { progress, setProgress, ready, subscriptionStatus, trialEndsAt } = useProgressState();
   const colours = lessonColours;
   const lessonProgress = calculateLessonProgress(progress, lesson.slug);
+  const access = getLearningAccess(progress, subscriptionStatus, trialEndsAt);
 
   const handleQuizComplete = (score: number) => {
     const percentage = Math.round((score / lesson.quiz.length) * 100);
@@ -52,6 +54,33 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
   ) => {
     setProgress((current) => markAnswerAttempt(current, { lessonSlug: lesson.slug, activity, ...answer }));
   };
+
+  if (!ready) {
+    return (
+      <main className="page-shell">
+        <section className="card-surface p-6 sm:p-8" aria-live="polite">
+          <p className="font-semibold text-ink/65">Checking lesson access…</p>
+        </section>
+      </main>
+    );
+  }
+
+  if (!access.canAccessStart) {
+    return (
+      <main className="page-shell">
+        <section className="card-surface p-6 sm:p-8">
+          <p className="eyebrow">START is locked</p>
+          <h1 className="mt-2 font-display text-3xl font-bold">Begin your 14-day START trial</h1>
+          <p className="mt-3 max-w-2xl leading-7 text-ink/65">
+            START lessons are available during your 14-day free trial and remain available with an active subscription.
+          </p>
+          <Link href="/sign-up" className="mt-5 inline-flex rounded-full bg-portugalGreen px-5 py-3 font-bold text-white transition hover:bg-ink">
+            Start 14-day trial
+          </Link>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="page-shell learning-page">
@@ -179,7 +208,11 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
         {lesson.slug === "food" ? (
           <SupermarketRoleplay onAnswer={(answer) => handleAnswer("roleplay", answer)} />
         ) : null}
-        <TranslateCrisisGame onAnswer={(answer) => handleAnswer("crisisGame", answer)} />
+        <TranslateCrisisGame
+          canAccessSmooth={access.canAccessSmooth}
+          canAccessSturdy={access.canAccessSturdy}
+          onAnswer={(answer) => handleAnswer("crisisGame", answer)}
+        />
         <QuizPanel
           questions={lesson.quiz}
           phraseBuilderComplete={Boolean(progress.practiceByLesson[lesson.slug]?.phraseBuilderCompleted)}

@@ -59,6 +59,8 @@ export type AppProgress = {
   answerHistory: LearningAnswer[];
 };
 
+export type SubscriptionStatus = "trialing" | "active" | "past_due" | "canceled" | "expired" | null;
+
 export const defaultProgress: AppProgress = {
   curriculumVersion: 2,
   updatedAt: null,
@@ -385,7 +387,8 @@ export function calculateCourseMastery(progress: AppProgress, lessonSlugs: reado
 export function useProgressState() {
   const [progress, setProgressState] = useState<AppProgress>(defaultProgress);
   const [ready, setReady] = useState(false);
-  const [subscriptionStatus, setSubscriptionStatus] = useState<string | null>(null);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus>(null);
+  const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -393,16 +396,19 @@ export function useProgressState() {
 
     async function hydrateAccountProgress() {
       let selected = localProgress;
-      let accountSubscriptionStatus: string | null = null;
+      let accountSubscriptionStatus: SubscriptionStatus = null;
+      let accountTrialEndsAt: string | null = null;
       try {
         const response = await fetch("/api/subscriber/progress", { cache: "no-store" });
         if (response.ok) {
           const remote = await response.json() as {
             progress?: Partial<AppProgress> | null;
             updated_at?: string | null;
-            subscription_status?: string | null;
+            subscription_status?: SubscriptionStatus;
+            trial_ends_at?: string | null;
           };
           accountSubscriptionStatus = remote.subscription_status ?? null;
+          accountTrialEndsAt = remote.trial_ends_at ?? null;
           if (remote.progress && Object.keys(remote.progress).length > 0) {
             const remoteProgress: AppProgress = { ...defaultProgress, ...remote.progress };
             if (remoteProgress.curriculumVersion === defaultProgress.curriculumVersion) {
@@ -419,6 +425,7 @@ export function useProgressState() {
       if (active) {
         setProgressState(selected);
         setSubscriptionStatus(accountSubscriptionStatus);
+        setTrialEndsAt(accountTrialEndsAt);
         saveProgress(selected);
         setReady(true);
       }
@@ -450,5 +457,5 @@ export function useProgressState() {
     });
   }, []);
 
-  return { progress, setProgress, ready, subscriptionStatus };
+  return { progress, setProgress, ready, subscriptionStatus, trialEndsAt };
 }

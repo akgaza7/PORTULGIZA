@@ -9,6 +9,7 @@ import { GreetingResponseGuide } from "@/components/greeting-response-guide";
 import { GreetingVocabularyGuide } from "@/components/greeting-vocabulary-guide";
 import { NumbersInSentences } from "@/components/numbers-in-sentences";
 import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
+import { getLearningAccess } from "@/lib/learning-access";
 import { lessons, type CategoryLesson } from "@/lib/lesson-data";
 import { markAnswerAttempt, markPracticeActivity, useProgressState } from "@/lib/storage";
 
@@ -39,8 +40,9 @@ const coreMatchLabels: Record<
 };
 
 export function DashboardShell() {
-  const { progress, setProgress, subscriptionStatus } = useProgressState();
+  const { progress, setProgress, ready, subscriptionStatus, trialEndsAt } = useProgressState();
   const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | "food-conversations" | "numbers-in-sentences" | null>(null);
+  const access = getLearningAccess(progress, subscriptionStatus, trialEndsAt);
 
   return (
     <main className="page-shell">
@@ -72,34 +74,57 @@ export function DashboardShell() {
           <p className="eyebrow">Lessons</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
-          <Link
-            href="/lesson/greetings"
-            className="rounded-[1.5rem] border border-portugalGreen/20 bg-portugalGreen/10 p-4 transition hover:-translate-y-0.5 hover:border-portugalGreen/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
-          >
-            <span className="inline-flex rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
-              Start
-            </span>
-          </Link>
-          <Link
-            href="/lesson/greetings?level=Intermediate#translate-crisis-game"
-            className="rounded-[1.5rem] border border-portugalBlue/20 bg-portugalBlue/5 p-4 transition hover:-translate-y-0.5 hover:border-portugalBlue/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalBlue"
-          >
-            <span className="inline-flex rounded-full bg-portugalBlue px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
-              Smooth
-            </span>
-            <p className="mt-3 text-sm font-semibold text-portugalBlue">Unlocks after START</p>
-          </Link>
-          <Link
-            href="/lesson/greetings?level=Advanced#translate-crisis-game"
-            className="rounded-[1.5rem] border border-portugalGold/70 bg-portugalGold/20 p-4 transition hover:-translate-y-0.5 hover:border-portugalGold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
-          >
-            <span className="inline-flex rounded-full bg-portugalGold px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">
-              STURDY
-            </span>
-            <p className="mt-3 text-sm font-semibold text-black">Unlocks after SMOOTH</p>
-          </Link>
+          {access.canAccessStart ? (
+            <Link
+              href="/lesson/greetings"
+              className="rounded-[1.5rem] border border-portugalGreen/20 bg-portugalGreen/10 p-4 transition hover:-translate-y-0.5 hover:border-portugalGreen/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
+            >
+              <span className="inline-flex rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">START</span>
+              {access.isTrialActive ? <p className="mt-3 text-sm font-semibold text-portugalGreen">14-day trial access</p> : null}
+            </Link>
+          ) : (
+            <Link
+              href="/sign-up"
+              className="rounded-[1.5rem] border border-portugalGreen/15 bg-portugalGreen/5 p-4 transition hover:border-portugalGreen/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
+            >
+              <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-portugalGreen">
+                START <span aria-hidden="true">🔒</span>
+              </span>
+              <p className="mt-3 text-sm font-semibold text-portugalGreen">Start your 14-day trial</p>
+            </Link>
+          )}
+          {access.canAccessSmooth ? (
+            <Link
+              href="/lesson/greetings?level=Intermediate#translate-crisis-game"
+              className="rounded-[1.5rem] border border-portugalBlue/20 bg-portugalBlue/5 p-4 transition hover:-translate-y-0.5 hover:border-portugalBlue/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalBlue"
+            >
+              <span className="inline-flex rounded-full bg-portugalBlue px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">SMOOTH</span>
+            </Link>
+          ) : (
+            <div aria-disabled="true" className="cursor-not-allowed rounded-[1.5rem] border border-portugalBlue/15 bg-portugalBlue/[0.03] p-4 opacity-70">
+              <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-portugalBlue">
+                SMOOTH <span aria-hidden="true">🔒</span>
+              </span>
+              <p className="mt-3 text-sm font-semibold text-portugalBlue">Pass START and subscribe</p>
+            </div>
+          )}
+          {access.canAccessSturdy ? (
+            <Link
+              href="/lesson/greetings?level=Advanced#translate-crisis-game"
+              className="rounded-[1.5rem] border border-portugalGold/70 bg-portugalGold/20 p-4 transition hover:-translate-y-0.5 hover:border-portugalGold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
+            >
+              <span className="inline-flex rounded-full bg-portugalGold px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">STURDY</span>
+            </Link>
+          ) : (
+            <div aria-disabled="true" className="cursor-not-allowed rounded-[1.5rem] border border-portugalGold/45 bg-portugalGold/10 p-4 opacity-70">
+              <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-black">
+                STURDY <span aria-hidden="true">🔒</span>
+              </span>
+              <p className="mt-3 text-sm font-semibold text-black">Pass START and subscribe</p>
+            </div>
+          )}
         </div>
-        <p className="mt-3 text-xs text-muted">Each level must be completed before another level opens.</p>
+        <p className="mt-3 text-xs text-muted">SMOOTH and STURDY unlock after START is passed and the £4.99 monthly subscription is active.</p>
         </section>
       </div>
 
@@ -138,6 +163,11 @@ export function DashboardShell() {
           </div>
         </div>
 
+        {!ready ? (
+          <div className="rounded-[1.75rem] border border-ink/10 bg-white/70 p-5 text-sm font-semibold text-ink/55" aria-live="polite">
+            Checking lesson access…
+          </div>
+        ) : access.canAccessStart ? (
         <div className="grid gap-3">
           {lessons.map((lesson) => {
             const labels = coreMatchLabels[lesson.slug];
@@ -277,6 +307,17 @@ export function DashboardShell() {
             );
           })}
         </div>
+        ) : (
+          <div className="rounded-[1.75rem] border border-portugalGold/50 bg-portugalGold/10 p-5 sm:max-w-xl">
+            <p className="font-display text-2xl font-bold text-ink">START is locked</p>
+            <p className="mt-2 text-sm leading-6 text-ink/65">
+              Non-paying learners can use START during the 14-day free trial. Subscribe to continue after the trial.
+            </p>
+            <Link href="/sign-up" className="mt-4 inline-flex rounded-full bg-portugalGreen px-5 py-3 text-sm font-bold text-white transition hover:bg-ink">
+              Start 14-day trial
+            </Link>
+          </div>
+        )}
       </section>
     </main>
   );

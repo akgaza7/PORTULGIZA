@@ -14,7 +14,7 @@ export async function GET() {
 
   const [progressResult, subscriberResult] = await Promise.all([
     supabase.from("learning_progress").select("progress,mastery_score,updated_at").eq("user_id", user.id).maybeSingle(),
-    supabase.from("subscribers").select("subscription_status").eq("user_id", user.id).maybeSingle()
+    supabase.from("subscribers").select("subscription_status,trial_ends_at").eq("user_id", user.id).maybeSingle()
   ]);
 
   if (progressResult.error || subscriberResult.error) {
@@ -23,7 +23,8 @@ export async function GET() {
 
   return NextResponse.json({
     ...(progressResult.data ?? { progress: null, mastery_score: 0, updated_at: null }),
-    subscription_status: subscriberResult.data?.subscription_status ?? null
+    subscription_status: subscriberResult.data?.subscription_status ?? null,
+    trial_ends_at: subscriberResult.data?.trial_ends_at ?? null
   });
 }
 

@@ -11,6 +11,8 @@ type ScenarioAnswer = {
 
 type TouristScenarioGameProps = {
   onAnswer: (answer: ScenarioAnswer) => void;
+  canAccessSmooth: boolean;
+  canAccessSturdy: boolean;
 };
 
 type Level = "Beginner" | "Intermediate" | "Advanced";
@@ -148,7 +150,7 @@ const levelLabels: Record<Level, string> = {
   Advanced: "Sturdy"
 };
 
-export function TranslateCrisisGame({ onAnswer }: TouristScenarioGameProps) {
+export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy }: TouristScenarioGameProps) {
   const [level, setLevel] = useState<Level>("Beginner");
   const [scenarioIndex, setScenarioIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -161,14 +163,18 @@ export function TranslateCrisisGame({ onAnswer }: TouristScenarioGameProps) {
   useEffect(() => {
     const requestedLevel = new URLSearchParams(window.location.search).get("level");
     if (requestedLevel !== "Beginner" && requestedLevel !== "Intermediate" && requestedLevel !== "Advanced") return;
+    if (requestedLevel === "Intermediate" && !canAccessSmooth) return;
+    if (requestedLevel === "Advanced" && !canAccessSturdy) return;
 
     setLevel(requestedLevel);
     setScenarioIndex(0);
     setSelected(null);
     setCorrectCount(0);
-  }, []);
+  }, [canAccessSmooth, canAccessSturdy]);
 
   const chooseLevel = (nextLevel: Level) => {
+    if (nextLevel === "Intermediate" && !canAccessSmooth) return;
+    if (nextLevel === "Advanced" && !canAccessSturdy) return;
     setLevel(nextLevel);
     setScenarioIndex(0);
     setSelected(null);
@@ -216,18 +222,34 @@ export function TranslateCrisisGame({ onAnswer }: TouristScenarioGameProps) {
         </div>
 
         <div className="mt-6 grid gap-2 sm:grid-cols-3" aria-label="Choose a learning level">
-          {(Object.keys(scenarioSets) as Level[]).map((levelOption) => (
-            <button
-              key={levelOption}
-              type="button"
-              onClick={() => chooseLevel(levelOption)}
-              aria-pressed={level === levelOption}
-              className={`rounded-2xl border px-4 py-3 text-left transition ${level === levelOption ? levelStyles[levelOption] : "border-white/15 bg-white/5 text-white hover:bg-white/10"}`}
-            >
-              <span className="block text-sm font-bold">{levelLabels[levelOption]}</span>
-              <span className={`mt-1 block text-xs ${level === levelOption ? "text-white/75" : "text-white/50"}`}>{learnedCounts[levelOption]} sentences learned</span>
-            </button>
-          ))}
+          {(Object.keys(scenarioSets) as Level[]).map((levelOption) => {
+            const locked = (levelOption === "Intermediate" && !canAccessSmooth)
+              || (levelOption === "Advanced" && !canAccessSturdy);
+
+            return (
+              <button
+                key={levelOption}
+                type="button"
+                onClick={() => chooseLevel(levelOption)}
+                disabled={locked}
+                aria-pressed={level === levelOption}
+                aria-label={`${levelLabels[levelOption]}${locked ? " locked — pass START and subscribe to unlock" : ""}`}
+                className={`rounded-2xl border px-4 py-3 text-left transition ${locked
+                  ? "cursor-not-allowed border-white/10 bg-white/[0.03] text-white/45"
+                  : level === levelOption
+                    ? levelStyles[levelOption]
+                    : "border-white/15 bg-white/5 text-white hover:bg-white/10"}`}
+              >
+                <span className="flex items-center justify-between gap-2 text-sm font-bold">
+                  {levelLabels[levelOption]}
+                  {locked ? <span aria-hidden="true">🔒</span> : null}
+                </span>
+                <span className={`mt-1 block text-xs ${locked ? "text-white/40" : level === levelOption ? "text-white/75" : "text-white/50"}`}>
+                  {locked ? "Pass START and subscribe to unlock" : `${learnedCounts[levelOption]} sentences learned`}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
