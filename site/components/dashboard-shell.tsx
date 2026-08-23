@@ -150,7 +150,7 @@ export function DashboardShell() {
             const panelId = `start-here-${lesson.slug}-lesson`;
             return (
               <Fragment key={lesson.slug}>
-              <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+              <div className={`overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft transition-[width] ${expanded ? "w-full" : "w-full sm:w-[42%]"}`}>
                 <button
                   type="button"
                   aria-expanded={expanded}
@@ -197,7 +197,7 @@ export function DashboardShell() {
                 <GreetingVocabularyGuide />
               ) : null}
               {lesson.slug === "greetings" ? (
-                <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+                <div className={`overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft transition-[width] ${openLesson === "greeting-responses" ? "w-full" : "w-full sm:w-[42%]"}`}>
                   <button
                     type="button"
                     aria-expanded={openLesson === "greeting-responses"}
@@ -221,7 +221,7 @@ export function DashboardShell() {
                 </div>
               ) : null}
               {lesson.slug === "food" ? (
-                <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+                <div className={`overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft transition-[width] ${openLesson === "food-conversations" ? "w-full" : "w-full sm:w-[42%]"}`}>
                   <button
                     type="button"
                     aria-expanded={openLesson === "food-conversations"}
@@ -245,7 +245,7 @@ export function DashboardShell() {
                 </div>
               ) : null}
               {lesson.slug === "numbers" ? (
-                <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
+                <div className={`overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft transition-[width] ${openLesson === "numbers-in-sentences" ? "w-full" : "w-full sm:w-[42%]"}`}>
                   <button
                     type="button"
                     aria-expanded={openLesson === "numbers-in-sentences"}
