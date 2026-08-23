@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ProgressStrip } from "@/components/progress-strip";
 import { speakEuropeanPortuguese } from "@/components/speech-button";
 import { sentenceBanks } from "@/components/translate-crisis-game";
 import { useAvatarPreference } from "@/lib/avatar-preference";
@@ -153,26 +152,6 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
   });
   const hasDetailedProgress = ready && answers.correct.length + answers.needsPractice.length > 0;
   const nextLesson = lessons.find((lesson) => !progress.completedLessons[lesson.slug]?.completed) ?? lessons[0];
-  const today = new Date();
-  const attemptedToday = new Set(
-    ready
-      ? progress.answerHistory
-          .filter((answer) => new Date(answer.attemptedAt).toDateString() === today.toDateString())
-          .map((answer) => answer.lessonSlug)
-      : []
-  );
-  const todayLessonTitles = lessons
-    .filter((lesson) => attemptedToday.has(lesson.slug))
-    .map((lesson) => lesson.title);
-  const practisedLessonTitles = ready
-    ? lessons
-        .filter((lesson) =>
-          progress.practiceByLesson[lesson.slug] ||
-          progress.completedLessons[lesson.slug] ||
-          progress.answerHistory.some((answer) => answer.lessonSlug === lesson.slug)
-        )
-        .map((lesson) => lesson.title)
-    : [];
   useEffect(() => {
     if (!openReview) return;
 
@@ -208,28 +187,16 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
         </span>
       </div>
 
-      <div className="mt-4 grid gap-2 sm:grid-cols-3">
-        <div className="rounded-[1.25rem] bg-portugalBlue p-3 text-white">
-          <p className="metric-label text-white/70">Today</p>
-          <p className="mt-2 font-display text-xl font-bold leading-snug">
-            {todayLessonTitles.length ? todayLessonTitles.join(" · ") : "Nothing covered yet"}
-          </p>
-        </div>
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
         <div className="rounded-[1.25rem] bg-portugalGreen p-3 text-white">
-          <p className="metric-label text-white/75">Practised</p>
-          <p className="mt-2 font-display text-xl font-bold leading-snug">
-            {practisedLessonTitles.length ? practisedLessonTitles.join(" · ") : "No lessons yet"}
-          </p>
+          <p className="metric-label text-white/75">Progress level</p>
+          <p className="mt-2 font-display text-xl font-bold leading-snug">{ready ? mastery.score : 0}/100</p>
         </div>
         <div className="relative overflow-hidden rounded-[1.25rem] border border-ink/10 bg-sand/65 p-3 text-ink">
           <span className="absolute right-3 top-3 h-3 w-3 rounded-full bg-portugalGold" aria-hidden="true" />
           <p className="metric-label text-ink/65">Next lesson</p>
           <p className="mt-2 font-display text-xl font-bold leading-snug">{nextLesson.title}</p>
         </div>
-      </div>
-
-      <div className="mt-4">
-        <ProgressStrip value={ready ? mastery.score : 0} max={100} label="Progresso · Progress" tone="gold" />
       </div>
 
       {hasDetailedProgress ? (
