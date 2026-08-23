@@ -135,14 +135,17 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
           </a>
         </div>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          <div className="rounded-[1.75rem] border border-portugalGreen/15 bg-portugalGreen/5 p-4 sm:p-5">
-            <div className="flex items-center justify-between gap-3">
+          <details className="group rounded-[1.75rem] border border-portugalGreen/15 bg-portugalGreen/5 p-4 sm:p-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-portugalGreen [&::-webkit-details-marker]:hidden">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-portugalGreen">Correct</p>
                 <h4 className="mt-1 font-display text-2xl font-bold">You got these right</h4>
               </div>
-              <span className="rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold text-white">{correctItems.length}</span>
-            </div>
+              <span className="flex items-center gap-2">
+                <span className="rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold text-white">{correctItems.length}</span>
+                <span className="text-xl font-bold text-portugalGreen transition group-open:rotate-180" aria-hidden="true">⌄</span>
+              </span>
+            </summary>
             {correctItems.length ? (
               <ul className="mt-4 grid gap-2">
                 {correctItems.map((item) => (
@@ -163,15 +166,18 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
                 ))}
               </ul>
             ) : <p className="mt-4 rounded-2xl bg-white p-3 text-sm text-ink/55">No correct answers yet. Review the phrases and try again.</p>}
-          </div>
+          </details>
 
-          <div className="rounded-[1.75rem] border border-portugalRed/15 bg-portugalRed/5 p-4 sm:p-5">
-            <div className="flex items-center justify-between gap-3">
+          <details className="group rounded-[1.75rem] border border-portugalRed/15 bg-portugalRed/5 p-4 sm:p-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-portugalRed [&::-webkit-details-marker]:hidden">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-portugalRed">Needs practice</p>
               </div>
-              <span className="rounded-full bg-portugalRed px-3 py-1 text-xs font-bold text-white">{practiceItems.length}</span>
-            </div>
+              <span className="flex items-center gap-2">
+                <span className="rounded-full bg-portugalRed px-3 py-1 text-xs font-bold text-white">{practiceItems.length}</span>
+                <span className="text-xl font-bold text-portugalRed transition group-open:rotate-180" aria-hidden="true">⌄</span>
+              </span>
+            </summary>
             {practiceItems.length ? (
               <ul className="mt-4 grid gap-2">
                 {practiceItems.map((item) => (
@@ -205,7 +211,7 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
                 ))}
               </ul>
             ) : <p className="mt-4 rounded-2xl bg-white p-3 text-sm font-semibold text-portugalGreen">Excellent — every lesson phrase was correct.</p>}
-          </div>
+          </details>
         </div>
         <Link href="/dashboard" className="mt-5 inline-flex rounded-full border border-ocean/20 px-5 py-3 text-sm font-bold text-ocean transition hover:bg-sky/20">
           View the full learning dashboard ↑
