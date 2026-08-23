@@ -100,7 +100,7 @@ export const sentenceBanks: Record<Level, CurriculumSentence[]> = {
 
 const scenarioSets: Record<Level, ScenarioSeed[]> = {
   Beginner: [
-    { title: "Morning at the hotel", situation: "You greet the hotel receptionist, what would you say?", answer: 0, options: [0, 1, 19] },
+    { title: "Morning at the hotel", situation: "You greet the hotel receptionist in the morning, what would you say?", answer: 0, options: [0, 1, 19] },
     { title: "Checking on someone", situation: "You politely ask a new person how they are.", answer: 2, options: [2, 7, 5] },
     { title: "Introducing yourself", situation: "You meet another traveller and want to tell them your name.", answer: 6, options: [9, 6, 2] },
     { title: "Asking for English", situation: "You need help and want to know whether the station employee speaks English.", answer: 9, options: [10, 12, 9] },
