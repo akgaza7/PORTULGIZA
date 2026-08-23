@@ -58,7 +58,7 @@ export default function RootLayout({
           </nav>
           <div className="mt-4">
             <p className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              A little every day
+              A little learning everyday
             </p>
           </div>
         </header>
