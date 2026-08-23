@@ -150,7 +150,11 @@ export function StudentProgressDashboard({ progress, subscriptionStatus }: Stude
   }, [openReview]);
 
   return (
-    <section id="learning-dashboard" className="card-surface mx-auto w-full max-w-5xl scroll-mt-6 overflow-hidden p-4 sm:p-5" aria-labelledby="student-progress-heading">
+    <section
+      id="learning-dashboard"
+      className="mx-auto w-full max-w-5xl scroll-mt-6 overflow-hidden rounded-[2rem] border border-[#E7D1B6] bg-[#F8E7D4] p-4 shadow-soft sm:p-5"
+      aria-labelledby="student-progress-heading"
+    >
       <div className="relative -mx-4 -mt-4 mb-5 flex h-2 overflow-visible sm:-mx-5 sm:-mt-5" aria-hidden="true">
         <span className="w-2/5 bg-portugalGreen" />
         <span className="w-3/5 bg-portugalRed" />
