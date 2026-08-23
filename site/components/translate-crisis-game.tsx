@@ -223,12 +223,10 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
           </div>
         </div>
 
-        <div className="mt-6 grid gap-2 sm:grid-cols-3" aria-label="Choose a learning level">
+        <div className="mt-6 grid w-full max-w-[34rem] gap-2 sm:grid-cols-3" aria-label="Choose a learning level">
           {(Object.keys(scenarioSets) as Level[]).map((levelOption) => {
             const locked = (levelOption === "Intermediate" && !canAccessSmooth)
               || (levelOption === "Advanced" && !canAccessSturdy);
-            const isSturdy = levelOption === "Advanced";
-
             return (
               <button
                 key={levelOption}
@@ -237,11 +235,11 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
                 disabled={locked}
                 aria-pressed={level === levelOption}
                 aria-label={`${levelLabels[levelOption]}${locked ? " locked — pass START and subscribe to unlock" : ""}`}
-                className={`rounded-2xl border px-4 py-3 text-left uppercase text-ink transition ${isSturdy ? "border-portugalGold bg-portugalGold text-black" : "border-[#d8c6ae] bg-[#f3e4cf]"} ${locked
+                className={`rounded-2xl border border-[#d8c6ae] bg-[#f3e4cf] px-4 py-3 text-left uppercase text-ink transition ${locked
                   ? "cursor-not-allowed opacity-55"
                   : level === levelOption
-                    ? isSturdy ? "ring-2 ring-white/80" : "border-[#d6aa67] ring-2 ring-[#e2bd82]"
-                    : isSturdy ? "hover:brightness-95" : "hover:bg-[#ead8bf]"}`}
+                    ? "border-[#d6aa67] ring-2 ring-[#e2bd82]"
+                    : "hover:bg-[#ead8bf]"}`}
               >
                 <span className="flex items-center justify-between gap-2 text-sm font-bold">
                   {levelLabels[levelOption]}
@@ -260,7 +258,7 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
         <h4 className="font-display text-2xl font-bold">Scenario</h4>
         <p className="mt-2 max-w-3xl leading-7 text-ink/65">{scenario.situation}</p>
 
-        <div className="mt-4 grid gap-3">
+        <div className="mt-4 grid w-full max-w-[28rem] gap-3">
           {scenario.options.map((sentenceIndex, index) => {
             const option = curriculum[sentenceIndex];
             const chosen = selected === sentenceIndex;
@@ -277,10 +275,10 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
                 aria-label={`Hear and choose ${option.portuguese}`}
                 className={`flex gap-4 rounded-2xl border p-4 text-left transition ${
                   correctOption
-                    ? "border-portugalGreen bg-portugalGreen/10 text-portugalGreen"
+                    ? "border-portugalGreen bg-[#f3e4cf] text-portugalGreen"
                     : chosen
-                      ? "border-portugalRed bg-portugalRed/5 text-portugalRed"
-                      : "border-ink/10 bg-white text-ink hover:border-portugalBlue/35"
+                      ? "border-portugalRed bg-[#f3e4cf] text-portugalRed"
+                      : "border-[#d8c6ae] bg-[#f3e4cf] text-ink hover:border-[#b99d79] hover:bg-[#ead8bf]"
                 }`}
               >
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink/5 text-sm font-bold">{index + 1}</span>
@@ -304,7 +302,7 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
           type="button"
           disabled={selected === null}
           onClick={nextScenario}
-          className="mt-5 rounded-full bg-portugalBlue px-5 py-3 text-sm font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:bg-ink/10 disabled:text-ink/40"
+          className="mt-5 rounded-full border border-[#d8c6ae] bg-[#f3e4cf] px-5 py-3 text-sm font-bold text-ink transition hover:border-[#b99d79] hover:bg-[#ead8bf] disabled:cursor-not-allowed disabled:border-ink/10 disabled:bg-[#f3e4cf]/60 disabled:text-ink/40"
         >
           {scenarioIndex === 9 ? "Play this level again" : "Next tourist situation"}
         </button>
