@@ -78,7 +78,7 @@ export function DashboardShell() {
         </div>
       </div>
 
-      <section className="hero-panel relative mx-auto mb-6 aspect-[5/2] w-full overflow-hidden rounded-[2.25rem] sm:w-3/4 lg:w-1/2 xl:w-1/4">
+      <section className="hero-panel relative mb-6 aspect-[5/2] w-full overflow-hidden rounded-[2.25rem] sm:w-3/4 lg:w-1/2 xl:w-1/4">
         <Image
           src="/portulgiza-community-banner-v2.png"
           alt="Inês and Tiago learning with older and younger people from diverse backgrounds in Portugal"
