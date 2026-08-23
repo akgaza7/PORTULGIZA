@@ -273,8 +273,7 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
         <div className="rounded-[1.5rem] border border-portugalGreen/15 bg-portugalGreen/5 p-3 sm:p-4">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-portugalGreen">Correct answers</p>
-              <h3 className="mt-2">
+              <h3>
                 <button
                   type="button"
                   aria-expanded={openReview === "correct"}
@@ -282,7 +281,7 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
                   onClick={() => setOpenReview((current) => current === "correct" ? null : "correct")}
                   className="inline-flex min-h-11 items-center gap-2 rounded-full bg-portugalGreen px-5 py-2 font-display text-lg font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
                 >
-                  Review correct answers
+                  Correct Answers
                   <span aria-hidden="true">{openReview === "correct" ? "↑" : "↓"}</span>
                 </button>
               </h3>
@@ -298,8 +297,7 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
         <div className="rounded-[1.5rem] border border-portugalRed/15 bg-portugalRed/5 p-3 sm:p-4">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-portugalRed">Needs practice</p>
-              <h3 className="mt-2">
+              <h3>
                 <button
                   type="button"
                   aria-expanded={openReview === "practice"}
@@ -307,7 +305,7 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
                   onClick={() => setOpenReview((current) => current === "practice" ? null : "practice")}
                   className="inline-flex min-h-11 items-center gap-2 rounded-full bg-portugalRed px-5 py-2 font-display text-lg font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalRed"
                 >
-                  Practise weak areas
+                  Continue Practising
                   <span aria-hidden="true">{openReview === "practice" ? "↑" : "↓"}</span>
                 </button>
               </h3>
