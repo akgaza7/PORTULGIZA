@@ -141,20 +141,13 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
 
       </section>
 
-      <section id="core-phrases" className="mt-8 scroll-mt-6 card-surface p-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-portugalGreen/70">Core phrases</p>
-            <h2 className="text-2xl font-semibold">Listen and repeat</h2>
-          </div>
-          <div className="rounded-full bg-portugalGreen/10 px-4 py-2 text-sm font-medium text-portugalGreen">
-            Start Here European Portuguese
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <section
+        id="core-phrases"
+        className="mt-6 scroll-mt-6 rounded-[2rem] border border-white/80 bg-sand p-3 shadow-soft sm:p-4"
+      >
+        <div className="grid gap-3 md:grid-cols-2">
           {lesson.phrases.map((phrase) => (
-            <article key={phrase.portuguese} className="rounded-[2rem] bg-white p-5">
+            <article key={phrase.portuguese} className="rounded-[1.5rem] bg-white p-4">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 lang="pt-PT" className="text-2xl font-semibold"><GenderedPhrase phrase={phrase} /></h3>
