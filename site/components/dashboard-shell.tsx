@@ -55,19 +55,7 @@ export function DashboardShell() {
 
   return (
     <main className="page-shell">
-      <header className="mb-6 flex items-center justify-between gap-4 rounded-full border border-[#F8E7D4] bg-[#F8E7D4] px-4 py-3 shadow-soft sm:px-5">
-        <Link href="/" className="group block" aria-label="Portulgiza home">
-          <Image
-            src="/portulgiza-logo-v2.png"
-            alt="Portulgiza — European Portuguese Language Learning App"
-            width={1946}
-            height={808}
-            priority
-            sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 320px"
-            className="h-auto w-56 transition group-hover:scale-[1.01] sm:w-72 lg:w-80"
-          />
-        </Link>
-
+      <div className="mb-6 flex items-center justify-end gap-3">
         <div className="flex items-center gap-3">
           <div className="hidden items-center gap-2 text-sm text-ink/60 md:flex">
             <span className="h-2 w-2 rounded-full bg-clay" />
@@ -88,7 +76,7 @@ export function DashboardShell() {
             Subscriber&apos;s log in
           </Link>
         </div>
-      </header>
+      </div>
 
       <section className="hero-panel relative mx-auto mb-6 aspect-[5/2] w-full overflow-hidden rounded-[2.25rem] sm:w-3/4 lg:w-1/2 xl:w-1/4">
         <Image
