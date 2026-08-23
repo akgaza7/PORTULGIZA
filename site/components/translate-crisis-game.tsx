@@ -140,7 +140,7 @@ const scenarioSets: Record<Level, ScenarioSeed[]> = {
 const levelStyles: Record<Level, string> = {
   Beginner: "bg-portugalGreen text-white",
   Intermediate: "bg-portugalBlue text-white",
-  Advanced: "bg-portugalRed text-white"
+  Advanced: "bg-portugalGold text-black"
 };
 
 const learnedCounts: Record<Level, number> = { Beginner: 20, Intermediate: 40, Advanced: 60 };
@@ -225,6 +225,7 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
           {(Object.keys(scenarioSets) as Level[]).map((levelOption) => {
             const locked = (levelOption === "Intermediate" && !canAccessSmooth)
               || (levelOption === "Advanced" && !canAccessSturdy);
+            const isSturdy = levelOption === "Advanced";
 
             return (
               <button
@@ -234,11 +235,11 @@ export function TranslateCrisisGame({ onAnswer, canAccessSmooth, canAccessSturdy
                 disabled={locked}
                 aria-pressed={level === levelOption}
                 aria-label={`${levelLabels[levelOption]}${locked ? " locked — pass START and subscribe to unlock" : ""}`}
-                className={`rounded-2xl border bg-[#f3e4cf] px-4 py-3 text-left uppercase text-ink transition ${locked
-                  ? "cursor-not-allowed border-[#d8c6ae] opacity-55"
+                className={`rounded-2xl border px-4 py-3 text-left uppercase text-ink transition ${isSturdy ? "border-portugalGold bg-portugalGold text-black" : "border-[#d8c6ae] bg-[#f3e4cf]"} ${locked
+                  ? "cursor-not-allowed opacity-55"
                   : level === levelOption
-                    ? "border-[#d6aa67] ring-2 ring-[#e2bd82]"
-                    : "border-[#d8c6ae] hover:bg-[#ead8bf]"}`}
+                    ? isSturdy ? "ring-2 ring-white/80" : "border-[#d6aa67] ring-2 ring-[#e2bd82]"
+                    : isSturdy ? "hover:brightness-95" : "hover:bg-[#ead8bf]"}`}
               >
                 <span className="flex items-center justify-between gap-2 text-sm font-bold">
                   {levelLabels[levelOption]}

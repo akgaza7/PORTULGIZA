@@ -111,12 +111,12 @@ export function DashboardShell() {
           {access.canAccessSturdy ? (
             <Link
               href="/lesson/greetings?level=Advanced#translate-crisis-game"
-              className="rounded-[1.5rem] border border-portugalGold/70 bg-portugalGold/20 p-4 transition hover:-translate-y-0.5 hover:border-portugalGold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
+              className="rounded-[1.5rem] border border-portugalGold bg-portugalGold p-4 text-black transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
             >
-              <span className="inline-flex rounded-full bg-portugalGold px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">STURDY</span>
+              <span className="inline-flex rounded-full border border-black/15 bg-white/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">STURDY</span>
             </Link>
           ) : (
-            <div aria-disabled="true" className="cursor-not-allowed rounded-[1.5rem] border border-portugalGold/45 bg-portugalGold/10 p-4 opacity-70">
+            <div aria-disabled="true" className="cursor-not-allowed rounded-[1.5rem] border border-portugalGold bg-portugalGold p-4 text-black opacity-60">
               <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-black">
                 STURDY <span aria-hidden="true">🔒</span>
               </span>
