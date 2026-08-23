@@ -161,9 +161,6 @@ export function DashboardShell() {
           <div>
             <h2 className="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">Start</h2>
           </div>
-          <p className="max-w-md text-sm leading-6 text-ink/50 sm:text-right">
-            Each lesson combines useful phrases, functional visual links, listening, and a quick confidence check.
-          </p>
         </div>
 
         <div ref={lessonListRef} className="grid gap-3">
