@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ProgressStrip } from "@/components/progress-strip";
 import { speakEuropeanPortuguese } from "@/components/speech-button";
@@ -203,12 +202,6 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
           <h2 id="student-progress-heading" className="font-display text-2xl font-bold sm:text-3xl">
             DASHBOARD
           </h2>
-          <Link
-            href={`/lesson/${nextLesson.slug}`}
-            className="mt-3 inline-flex min-h-11 items-center rounded-full bg-portugalGreen px-5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
-          >
-            Continue learning →
-          </Link>
         </div>
         <span className="w-fit rounded-full border border-portugalGold/50 bg-portugalGold/35 px-4 py-2 text-sm font-bold text-black">
           {ready ? mastery.score : 0}/100 progress
