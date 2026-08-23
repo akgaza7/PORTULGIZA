@@ -122,6 +122,7 @@ export function DashboardShell() {
             <p className="mt-3 text-sm font-semibold text-portugalRed">Unlocks after SMOOTH</p>
           </Link>
         </div>
+        <p className="mt-3 text-xs text-muted">Each level must be completed before another level opens.</p>
         </section>
       </div>
 
