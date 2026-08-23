@@ -1,14 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { portugueseAudioManifest } from "@/lib/portuguese-audio-manifest";
-
-type SpeechButtonProps = {
-  text: string;
-  onListen?: () => void;
-  label?: string;
-  voiceGender?: PortugueseVoiceGender;
-};
 
 export type PortugueseVoiceGender = "masculine" | "feminine";
 
@@ -140,37 +132,4 @@ export function speakEuropeanPortuguese(text: string, handlers: SpeechHandlers =
     window.speechSynthesis.addEventListener("voiceschanged", retry, { once: true });
   }
   return true;
-}
-
-export function SpeechButton({ text, onListen, label = "Listen", voiceGender }: SpeechButtonProps) {
-  const [speaking, setSpeaking] = useState(false);
-  const resolvedVoiceGender = resolvePortugueseVoiceGender(text, voiceGender);
-
-  const handleSpeak = () => {
-    speakEuropeanPortuguese(text, {
-      onStart: () => {
-        setSpeaking(true);
-        onListen?.();
-      },
-      onEnd: () => setSpeaking(false),
-      onError: () => setSpeaking(false),
-      voiceGender
-    });
-  };
-
-  return (
-    <button
-      type="button"
-      onClick={handleSpeak}
-      aria-label={`${label} with a ${resolvedVoiceGender} European Portuguese voice`}
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
-        speaking
-          ? "border-clay bg-clay text-white"
-          : "border-clay/20 bg-clay/10 text-clay hover:bg-clay hover:text-white"
-      }`}
-    >
-      <span>{speaking ? "Playing..." : label}</span>
-      <span aria-hidden="true">▸</span>
-    </button>
-  );
 }

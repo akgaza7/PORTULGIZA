@@ -20,7 +20,7 @@ type StudentProgressDashboardProps = {
 const activityLabels: Record<LearningAnswer["activity"], string> = {
   quiz: "Quiz",
   sentenceBuilder: "Sentence",
-  listening: "Listening",
+  listening: "Hearing",
   crisisGame: "Tourist challenge",
   flashcard: "Flashcard",
   roleplay: "Character role-play"

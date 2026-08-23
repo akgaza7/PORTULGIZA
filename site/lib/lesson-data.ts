@@ -110,7 +110,7 @@ const beginnerLessonSeeds: LessonSeed[] = [
       { portuguese: "três", english: "three", tip: "The accent marks the open vowel." },
       { portuguese: "quatro", english: "four", tip: "Often heard in addresses and room numbers." },
       { portuguese: "cinco", english: "five", tip: "Good to pair with prices." },
-      { portuguese: "seis", english: "six", tip: "Listen for the final 'sh' sound in European Portuguese." },
+      { portuguese: "seis", english: "six", tip: "Hear the final 'sh' sound in European Portuguese." },
       { portuguese: "sete", english: "seven", tip: "Useful for times, dates, and quantities." },
       { portuguese: "oito", english: "eight", tip: "The first sound is close to 'oy'." },
       { portuguese: "nove", english: "nine", tip: "Keep the final vowel light in European Portuguese." },
@@ -122,7 +122,7 @@ const beginnerLessonSeeds: LessonSeed[] = [
     title: "Food",
     subtitle: "Core food and drink words",
     description: "Learn ten everyday food and drink words before using them in a conversation.",
-    accentHint: "Listen to each word, then match it to its English meaning.",
+    accentHint: "Hear each word, then match it to its English meaning.",
     phrases: [
       { portuguese: "água", english: "water", tip: "The stress falls early: AH-gwa.", genderCue: { gender: "feminine", appliesTo: "noun", word: "água", explanation: "Água is a feminine noun: a água." } },
       { portuguese: "pão", english: "bread", tip: "The tilde marks a nasal sound.", genderCue: { gender: "masculine", appliesTo: "noun", word: "pão", explanation: "Pão is a masculine noun: o pão." } },
@@ -216,7 +216,7 @@ const beginnerLessonSeeds: LessonSeed[] = [
     title: "At Home",
     subtitle: "Rooms and everyday objects",
     description: "Describe simple places and objects around your home.",
-    accentHint: "The nasal sound in 'onde' is subtle; listen for the soft ending.",
+    accentHint: "The nasal sound in 'onde' is subtle; notice the soft ending.",
     phrases: [
       { portuguese: "Esta é a cozinha", english: "This is the kitchen", tip: "Cozinha means kitchen." },
       { portuguese: "O quarto é pequeno", english: "The bedroom is small", tip: "Adjectives often follow the noun." },
@@ -258,7 +258,7 @@ const beginnerLessonSeeds: LessonSeed[] = [
     title: "Directions",
     subtitle: "Find your way",
     description: "Ask where places are and understand simple route instructions.",
-    accentHint: "Listen for contractions such as 'ao' and 'à' in direction phrases.",
+    accentHint: "Notice contractions such as 'ao' and 'à' in direction phrases.",
     phrases: [
       { portuguese: "Onde fica o centro?", english: "Where is the centre?", tip: "Swap centro for another destination." },
       { portuguese: "Siga em frente", english: "Go straight ahead", tip: "A common direction instruction." },

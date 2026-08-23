@@ -177,7 +177,7 @@ export function NumbersInSentences({ onAttempt, onComplete }: NumbersInSentences
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-portugalGreen/10 text-portugalGreen transition-transform group-open:rotate-180" aria-hidden="true">↓</span>
         </summary>
         <div className="border-t border-portugalGreen/10 bg-sand/20 p-4 sm:p-5">
-          <p className="mb-4 text-sm text-ink/70 sm:text-base">Now listen to the words combined into complete sentences.</p>
+          <p className="mb-4 text-sm text-ink/70 sm:text-base">Now hear the words combined into complete sentences.</p>
           <div className="grid gap-3 sm:grid-cols-2">
             {sentenceExamples.map((phrase) => <AudioPhrase key={phrase.portuguese} phrase={phrase} />)}
           </div>
@@ -228,7 +228,7 @@ export function NumbersInSentences({ onAttempt, onComplete }: NumbersInSentences
               </div>
               {checked ? (
                 <div className={`mt-4 rounded-2xl p-4 ${correct ? "bg-portugalGreen/10 text-portugalGreen" : "bg-portugalRed/10 text-portugalRed"}`}>
-                  <p className="font-bold">{correct ? "Correct — well done!" : "Try again. Listen for the number and the word gender."}</p>
+                  <p className="font-bold">{correct ? "Correct — well done!" : "Try again. Hear the number and notice the word gender."}</p>
                 </div>
               ) : null}
               <div className="mt-4">

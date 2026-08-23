@@ -194,7 +194,7 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
 
       <h4 className="mt-8 text-xl font-semibold">{current.prompt}</h4>
       <div className="mt-3 rounded-2xl border border-portugalGold/30 bg-portugalGold/10 p-3 text-sm leading-6 text-ink/70" role="note">
-        Choose an answer and listen to its European Portuguese audio. You may change your choice before submitting. Once submitted, the answer is final and you cannot return to this question.
+        Choose an answer and hear its European Portuguese audio. You may change your choice before submitting. Once submitted, the answer is final and you cannot return to this question.
       </div>
       <div className="mt-4 grid gap-3">
         {current.options.map((option) => {

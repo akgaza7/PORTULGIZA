@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { SpeechButton, speakEuropeanPortuguese } from "@/components/speech-button";
+import { speakEuropeanPortuguese } from "@/components/speech-button";
 import { useAvatarPreference } from "@/lib/avatar-preference";
 import type { LessonPhrase } from "@/lib/lesson-data";
 
@@ -71,6 +71,13 @@ export function Flashcards({ phrases, onPractice, onListen, onAnswer }: Flashcar
     });
   };
 
+  const speakCurrentPhrase = () => {
+    speakEuropeanPortuguese(current.portuguese, {
+      voiceGender: current.genderCue?.gender,
+      onStart: onListen
+    });
+  };
+
   const submitAnswer = () => {
     if (!state.selected || state.revealed || state.locked) return;
     const correct = state.selected === current.english;
@@ -109,12 +116,20 @@ export function Flashcards({ phrases, onPractice, onListen, onAnswer }: Flashcar
       </div>
 
       <div className="flex min-h-36 w-full flex-col justify-between rounded-[1.5rem] bg-ocean p-4 text-left text-white shadow-[0_18px_40px_rgba(13,75,116,0.18)]">
-        <div className="flex items-start justify-between gap-4">
+        <div>
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Portuguese</p>
-            <h4 lang="pt-PT" className="mt-2 text-2xl font-semibold sm:text-3xl">{current.portuguese}</h4>
+            <button
+              type="button"
+              lang="pt-PT"
+              data-portuguese-voice-managed="true"
+              onClick={speakCurrentPhrase}
+              className="mt-2 rounded-lg text-left text-2xl font-semibold transition hover:text-portugalGold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-3xl"
+              aria-label={`Hear ${current.portuguese} in European Portuguese`}
+            >
+              {current.portuguese}
+            </button>
           </div>
-          <SpeechButton text={current.portuguese} onListen={onListen} voiceGender={current.genderCue?.gender} />
         </div>
         <p className="mt-2 max-w-xl text-xs text-white/75 sm:text-sm">{current.tip}</p>
       </div>

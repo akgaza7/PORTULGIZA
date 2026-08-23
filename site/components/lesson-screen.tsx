@@ -6,7 +6,7 @@ import { GenderCoach, GenderedPhrase } from "@/components/gender-coach";
 import { ListeningMatch } from "@/components/listening-match";
 import { PhraseBuilder } from "@/components/phrase-builder";
 import { QuizPanel } from "@/components/quiz-panel";
-import { SpeechButton } from "@/components/speech-button";
+import { speakEuropeanPortuguese } from "@/components/speech-button";
 import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
 import { SupermarketRoleplay } from "@/components/supermarket-roleplay";
 import { TranslateCrisisGame } from "@/components/translate-crisis-game";
@@ -148,16 +148,23 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
         <div className="grid gap-3 md:grid-cols-2">
           {lesson.phrases.map((phrase) => (
             <article key={phrase.portuguese} className="rounded-[1.5rem] bg-white p-4">
-              <div className="flex items-start justify-between gap-4">
+              <div>
                 <div>
-                  <h3 lang="pt-PT" className="text-2xl font-semibold"><GenderedPhrase phrase={phrase} /></h3>
+                  <button
+                    type="button"
+                    lang="pt-PT"
+                    data-portuguese-voice-managed="true"
+                    onClick={() => speakEuropeanPortuguese(phrase.portuguese, {
+                      onStart: () => handlePractice("listen"),
+                      voiceGender: phrase.genderCue?.gender
+                    })}
+                    className="rounded-lg text-left text-2xl font-semibold transition hover:text-portugalGreen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-portugalGreen"
+                    aria-label={`Hear ${phrase.portuguese} in European Portuguese`}
+                  >
+                    <GenderedPhrase phrase={phrase} />
+                  </button>
                   <p className="mt-2 text-base text-ink/70">{phrase.english}</p>
                 </div>
-                <SpeechButton
-                  text={phrase.portuguese}
-                  onListen={() => handlePractice("listen")}
-                  voiceGender={phrase.genderCue?.gender}
-                />
               </div>
               <p className="mt-4 text-sm leading-7 text-ink/65">{phrase.tip}</p>
               <GenderCoach phrase={phrase} />
@@ -178,7 +185,7 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
             <p className="eyebrow">Practice games</p>
             <h2 className="mt-2 font-display text-4xl font-bold">Learn by hearing</h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-ink/60">
-              Listen to useful European Portuguese, rebuild each sentence, and train your ear with immediate, friendly feedback.
+              Hear useful European Portuguese, rebuild each sentence, and train your ear with immediate, friendly feedback.
             </p>
           </div>
           <div className="grid gap-6 lg:grid-cols-2">

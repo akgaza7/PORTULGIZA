@@ -113,7 +113,7 @@ export function SupermarketRoleplay({ onAnswer }: SupermarketRoleplayProps) {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-portugalRed">Inês · Shop worker</p>
               <p className="mt-2 font-display text-xl font-bold text-ink">
-                {result === "correct" ? "Here are your items!" : result === "incorrect" ? "Try the word order again." : "I am listening."}
+                {result === "correct" ? "Here are your items!" : result === "incorrect" ? "Try the word order again." : "Ready for your answer."}
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export function SupermarketRoleplay({ onAnswer }: SupermarketRoleplayProps) {
               className="rounded-full bg-portugalGreen px-4 py-2 font-bold text-white transition hover:bg-ink disabled:cursor-default"
               aria-label={`Remove ${tile.portuguese} from the sentence`}
             >
-              {tile.portuguese}
+              <span lang="pt-PT">{tile.portuguese}</span>
             </button>
           )) : (
             <span className="text-sm text-ink/45">Choose the Portuguese words below.</span>
@@ -156,7 +156,7 @@ export function SupermarketRoleplay({ onAnswer }: SupermarketRoleplayProps) {
             disabled={Boolean(result)}
             className="rounded-full border border-portugalBlue/20 bg-white px-4 py-2 font-bold text-portugalBlue transition hover:border-portugalBlue hover:bg-portugalBlue/5 disabled:opacity-45"
           >
-            {tile.portuguese}
+            <span lang="pt-PT">{tile.portuguese}</span>
           </button>
         ))}
       </div>

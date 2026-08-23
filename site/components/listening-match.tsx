@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { SpeechButton, speakEuropeanPortuguese, type PortugueseVoiceGender } from "@/components/speech-button";
+import { speakEuropeanPortuguese, type PortugueseVoiceGender } from "@/components/speech-button";
 import type { CategoryLesson } from "@/lib/lesson-data";
 import { splitWordMeanings } from "@/lib/word-meanings";
 
@@ -123,14 +123,14 @@ export function ListeningMatch({ lesson, onComplete, onListen, onAnswer }: Liste
     return (
       <section className="card-surface flex h-full flex-col justify-between p-6">
         <div>
-          <p className="eyebrow">Listen &amp; Match</p>
-          <h3 className="mt-2 font-display text-3xl font-bold">Listening complete</h3>
+          <p className="eyebrow">Hear &amp; Match</p>
+          <h3 className="mt-2 font-display text-3xl font-bold">Practice complete</h3>
           <p className="mt-3 leading-7 text-ink/65">
             You matched {correctCount} of {challenges.length} phrases correctly on the first attempt.
           </p>
         </div>
         <button type="button" onClick={restartGame} className="mt-6 w-fit rounded-full bg-ocean px-5 py-3 text-sm font-semibold text-white transition hover:bg-ink">
-          Listen again
+          Try again
         </button>
       </section>
     );
@@ -140,7 +140,7 @@ export function ListeningMatch({ lesson, onComplete, onListen, onAnswer }: Liste
     <section className="card-surface p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="eyebrow">Listen &amp; Match</p>
+          <p className="eyebrow">Hear &amp; Match</p>
           <h3 className="mt-2 font-display text-3xl font-bold">What did you hear?</h3>
         </div>
         <span aria-live="polite" className="rounded-full bg-sky/30 px-3 py-1.5 text-sm font-semibold text-ocean">
@@ -150,14 +150,20 @@ export function ListeningMatch({ lesson, onComplete, onListen, onAnswer }: Liste
 
       <div className="mt-5 rounded-[1.5rem] bg-ocean p-5 text-white">
         <p className="text-sm text-white/65">Hear and read the Portuguese, then choose its meaning below.</p>
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <SpeechButton
-            text={challenge.portuguese}
-            onListen={onListen}
-            label="Hear it again"
-            voiceGender={challenge.voiceGender}
-          />
-          <p className="font-display text-2xl font-bold text-white" lang="pt-PT">{challenge.portuguese}</p>
+        <div className="mt-4">
+          <button
+            type="button"
+            lang="pt-PT"
+            data-portuguese-voice-managed="true"
+            onClick={() => speakEuropeanPortuguese(challenge.portuguese, {
+              onStart: onListen,
+              voiceGender: challenge.voiceGender
+            })}
+            className="rounded-lg text-left font-display text-2xl font-bold text-white transition hover:text-portugalGold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            aria-label={`Hear ${challenge.portuguese} in European Portuguese`}
+          >
+            {challenge.portuguese}
+          </button>
         </div>
       </div>
 
@@ -208,7 +214,7 @@ export function ListeningMatch({ lesson, onComplete, onListen, onAnswer }: Liste
             : !isCorrect
               ? "Try again"
               : challengeIndex === challenges.length - 1
-                ? "Finish listening"
+                ? "Finish"
                 : "Next"}
         </button>
 
