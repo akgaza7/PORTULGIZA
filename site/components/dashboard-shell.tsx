@@ -78,18 +78,19 @@ export function DashboardShell() {
         </div>
       </div>
 
-      <section className="hero-panel relative mb-6 aspect-[5/2] w-full overflow-hidden rounded-[2.25rem] sm:w-3/4 lg:w-1/2 xl:w-1/4">
-        <Image
-          src="/portulgiza-community-banner-v2.png"
-          alt="Inês and Tiago learning with older and younger people from diverse backgrounds in Portugal"
-          fill
-          priority
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, (max-width: 1280px) 50vw, 25vw"
-          className="object-cover object-center"
-        />
-      </section>
+      <div className="mb-6 grid items-start gap-6 lg:grid-cols-2">
+        <section className="hero-panel relative aspect-[5/2] w-full overflow-hidden rounded-[2.25rem]">
+          <Image
+            src="/portulgiza-community-banner-v2.png"
+            alt="Inês and Tiago learning with older and younger people from diverse backgrounds in Portugal"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover object-center"
+          />
+        </section>
 
-      <section className="card-surface mb-6 p-5 sm:p-6" aria-label="Course pathway">
+        <section className="card-surface p-5 sm:p-6" aria-label="Course pathway">
         <div className="mb-5">
           <p className="eyebrow">Course pathway</p>
         </div>
@@ -125,7 +126,8 @@ export function DashboardShell() {
             <span className="mt-3 inline-flex text-xs font-bold uppercase tracking-[0.12em] text-portugalRed">Open Sturdy →</span>
           </Link>
         </div>
-      </section>
+        </section>
+      </div>
 
       <div className="mb-6">
         <AvatarChoice />
