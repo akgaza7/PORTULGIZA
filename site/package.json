@@ -11,6 +11,7 @@
     "lint": "eslint . --max-warnings=0"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "4.26.0",
     "@supabase/ssr": "^0.12.4",
     "@supabase/supabase-js": "^2.112.3",
     "next": "15.5.21",
