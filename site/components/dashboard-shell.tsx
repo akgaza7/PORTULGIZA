@@ -117,10 +117,9 @@ export function DashboardShell() {
             className="rounded-[1.5rem] border border-portugalRed/20 bg-portugalRed/5 p-4 transition hover:-translate-y-0.5 hover:border-portugalRed/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalRed"
           >
             <span className="inline-flex rounded-full bg-portugalRed px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
-              Sturdy
+              STURDY
             </span>
-            <p className="mt-3 text-sm font-semibold text-portugalRed">Unlocks after Smooth</p>
-            <span className="mt-3 inline-flex text-xs font-bold uppercase tracking-[0.12em] text-portugalRed">Open Sturdy →</span>
+            <p className="mt-3 text-sm font-semibold text-portugalRed">Unlocks after SMOOTH</p>
           </Link>
         </div>
         </section>
