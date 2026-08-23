@@ -26,22 +26,9 @@ export function AvatarChoice({ compact = false }: AvatarChoiceProps) {
   return (
     <section
       className={compact ? "rounded-[1.5rem] border border-ocean/10 bg-white/85 p-4" : "card-surface p-5 sm:p-6"}
-      aria-labelledby={compact ? "lesson-avatar-choice" : "avatar-choice"}
+      aria-label="Choose a learning avatar"
     >
       <div className="flex flex-col items-center gap-4 text-center">
-        <div>
-          <p className="eyebrow">Your learning guide</p>
-          <h2
-            id={compact ? "lesson-avatar-choice" : "avatar-choice"}
-            className={`mt-2 font-display font-bold tracking-tight ${compact ? "text-2xl" : "text-3xl sm:text-4xl"}`}
-          >
-            Choose your avatar
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-ink/60">
-            Choose Inês or Tiago as your guide. You can change this at any time.
-          </p>
-        </div>
-
         <div className="flex flex-wrap justify-center gap-3" role="group" aria-label="Choose a learning avatar">
           {avatarOptions.map((option) => {
             const details = avatarDetails[option];
