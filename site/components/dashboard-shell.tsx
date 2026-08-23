@@ -168,7 +168,7 @@ export function DashboardShell() {
                     <span className="block font-display text-2xl font-bold text-ink sm:text-3xl">
                       {lesson.title}: <span className="text-portugalGreen">{labels.objective}</span>
                     </span>
-                    <span className="mt-1 block text-sm text-ink/55">{labels.coreLabel}</span>
+                    {lesson.slug === "greetings" ? null : <span className="mt-1 block text-sm text-ink/55">{labels.coreLabel}</span>}
                   </span>
                   <span
                     className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border border-portugalGreen/20 bg-portugalGreen/10 text-xl font-bold text-portugalGreen transition-transform ${expanded ? "rotate-180" : ""}`}
