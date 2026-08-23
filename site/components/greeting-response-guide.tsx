@@ -28,9 +28,9 @@ const responseGroups: ResponseGroup[] = [
     title: "🌅 Time of Day Greetings",
     introduction: "The easiest rule in Portugal is to repeat the exact greeting back to the person.",
     rows: [
-      { prompts: [{ text: "Bom dia!" }], replies: [{ text: "Bom dia!" }] },
-      { prompts: [{ text: "Boa tarde!" }], replies: [{ text: "Boa tarde!" }] },
-      { prompts: [{ text: "Boa noite!" }], replies: [{ text: "Boa noite!" }] }
+      { prompts: [{ text: "Bom dia!", gender: "feminine" }], replies: [{ text: "Bom dia!", gender: "feminine" }] },
+      { prompts: [{ text: "Boa tarde!", gender: "feminine" }], replies: [{ text: "Boa tarde!", gender: "feminine" }] },
+      { prompts: [{ text: "Boa noite!", gender: "feminine" }], replies: [{ text: "Boa noite!", gender: "feminine" }] }
     ]
   },
   {

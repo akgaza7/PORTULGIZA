@@ -1,12 +1,14 @@
 "use client";
 
 import { speakEuropeanPortuguese } from "@/components/speech-button";
+import type { PortugueseVoiceGender } from "@/components/speech-button";
 import { useAvatarPreference } from "@/lib/avatar-preference";
 
 type GreetingItem = {
   portuguese: string;
   english: string;
   note?: string;
+  gender?: PortugueseVoiceGender;
 };
 
 type GreetingSection = {
@@ -21,9 +23,9 @@ const greetingSections: GreetingSection[] = [
     introduction: "Safe to use in formal or casual situations across Portugal.",
     items: [
       { portuguese: "Olá!", english: "Hello! / Hi!", note: "The most common, universal greeting." },
-      { portuguese: "Bom dia!", english: "Good morning!", note: "Used from sunrise until lunchtime, usually around 1:00 PM." },
-      { portuguese: "Boa tarde!", english: "Good afternoon!", note: "Used from lunchtime until nightfall, usually around 8:00 PM." },
-      { portuguese: "Boa noite!", english: "Good evening! / Good night!", note: "Used after dark, both as a greeting and a farewell." }
+      { portuguese: "Bom dia!", english: "Good morning!", note: "Used from sunrise until lunchtime, usually around 1:00 PM.", gender: "feminine" },
+      { portuguese: "Boa tarde!", english: "Good afternoon!", note: "Used from lunchtime until nightfall, usually around 8:00 PM.", gender: "feminine" },
+      { portuguese: "Boa noite!", english: "Good evening! / Good night!", note: "Used after dark, both as a greeting and a farewell.", gender: "feminine" }
     ]
   },
   {
@@ -84,7 +86,7 @@ export function GreetingVocabularyGuide() {
                 <div key={item.portuguese} className="rounded-2xl border border-portugalGreen/15 bg-white p-3 shadow-sm">
                   <button
                     type="button"
-                    onClick={() => speakEuropeanPortuguese(item.portuguese, { voiceGender, rate: 0.9 })}
+                    onClick={() => speakEuropeanPortuguese(item.portuguese, { voiceGender: item.gender ?? voiceGender, rate: 0.9 })}
                     data-portuguese-voice-managed="true"
                     className="inline-flex min-h-11 w-full items-center justify-between gap-3 rounded-xl bg-portugalGreen/5 px-3 py-2 text-left font-bold text-portugalGreen transition hover:bg-portugalGreen/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
                     lang="pt-PT"

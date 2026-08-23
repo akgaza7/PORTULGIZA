@@ -28,6 +28,17 @@ const activityLabels: Record<LearningAnswer["activity"], string> = {
 
 function findAnswerPhrase(answer: LearningAnswer) {
   const correctAnswer = answer.correctAnswer.trim().toLocaleLowerCase("pt-PT");
+  const lesson = lessons.find((candidate) => candidate.slug === answer.lessonSlug);
+  const prompt = answer.prompt.toLocaleLowerCase("pt-PT");
+  const lessonPhrase = lesson?.phrases.find((phrase) => {
+    const portuguese = phrase.portuguese.trim().toLocaleLowerCase("pt-PT");
+    const english = phrase.english.trim().toLocaleLowerCase("pt-PT");
+
+    return correctAnswer === portuguese || correctAnswer === english || prompt.includes(portuguese);
+  });
+
+  if (lessonPhrase) return lessonPhrase;
+
   const curriculumSentence = Object.values(sentenceBanks)
     .flat()
     .find((sentence) => sentence.portuguese.trim().toLocaleLowerCase("pt-PT") === correctAnswer);
@@ -40,17 +51,7 @@ function findAnswerPhrase(answer: LearningAnswer) {
     };
   }
 
-  const lesson = lessons.find((candidate) => candidate.slug === answer.lessonSlug);
-  if (!lesson) return null;
-
-  const prompt = answer.prompt.toLocaleLowerCase("pt-PT");
-
-  return lesson.phrases.find((phrase) => {
-    const portuguese = phrase.portuguese.trim().toLocaleLowerCase("pt-PT");
-    const english = phrase.english.trim().toLocaleLowerCase("pt-PT");
-
-    return correctAnswer === portuguese || correctAnswer === english || prompt.includes(portuguese);
-  }) ?? null;
+  return null;
 }
 
 function AnswerList({ answers, emptyMessage, needsPractice = false }: {
@@ -85,7 +86,7 @@ function AnswerList({ answers, emptyMessage, needsPractice = false }: {
                 <button
                   type="button"
                   onClick={() => speakEuropeanPortuguese(phrase.portuguese, {
-                    voiceGender: avatar === "female" ? "feminine" : "masculine",
+                    voiceGender: phrase.genderCue?.gender ?? (avatar === "female" ? "feminine" : "masculine"),
                     rate: 0.9
                   })}
                   aria-label={`Hear ${phrase.portuguese} in European Portuguese at medium speed`}

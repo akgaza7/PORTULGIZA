@@ -23,6 +23,34 @@ type SpeechHandlers = {
 const feminineVoiceNames = ["helia", "joana", "raquel", "fernanda", "ines", "inês", "maria", "catarina", "luciana", "francisca", "female", "mulher"];
 const masculineVoiceNames = ["duarte", "joaquim", "jorge", "joao", "joão", "tiago", "antonio", "antónio", "ricardo", "cristiano", "male", "homem"];
 let activeAudio: HTMLAudioElement | null = null;
+let normalizedAudioManifest: Map<string, (typeof portugueseAudioManifest)[string]> | null = null;
+
+function normalizePortugueseText(text: string) {
+  return text
+    .trim()
+    .toLocaleLowerCase("pt-PT")
+    .replace(/[.!?…]+$/u, "")
+    .replace(/\s+/g, " ");
+}
+
+export function resolvePortugueseVoiceGender(text: string, voiceGender?: PortugueseVoiceGender) {
+  // Inês is the agreed speaker for this greeting. This affects only the
+  // character voice; the lesson still correctly teaches dia as masculine.
+  if (/\bbom dia\b/u.test(normalizePortugueseText(text))) return "feminine";
+
+  return voiceGender ?? "feminine";
+}
+
+function findRecordedAudio(text: string, gender: PortugueseVoiceGender) {
+  normalizedAudioManifest ??= new Map(
+    Object.entries(portugueseAudioManifest).map(([recordedText, sources]) => [
+      normalizePortugueseText(recordedText),
+      sources
+    ])
+  );
+
+  return normalizedAudioManifest.get(normalizePortugueseText(text))?.[gender];
+}
 
 function findEuropeanPortugueseVoice(voices: SpeechSynthesisVoice[], voiceGender?: PortugueseVoiceGender) {
   const portugalVoices = voices.filter((voice) => {
@@ -52,8 +80,8 @@ export function speakEuropeanPortuguese(text: string, handlers: SpeechHandlers =
   activeAudio = null;
   if ("speechSynthesis" in window) window.speechSynthesis.cancel();
 
-  const gender = handlers.voiceGender ?? "feminine";
-  const recordedAudio = portugueseAudioManifest[text]?.[gender];
+  const gender = resolvePortugueseVoiceGender(text, handlers.voiceGender);
+  const recordedAudio = portugueseAudioManifest[text]?.[gender] ?? findRecordedAudio(text, gender);
 
   if (recordedAudio) {
     const audio = new Audio(recordedAudio);
@@ -88,7 +116,7 @@ export function speakEuropeanPortuguese(text: string, handlers: SpeechHandlers =
   utterance.onerror = () => handlers.onError?.();
 
   const play = (reportFailure = true) => {
-    const portugalVoice = findEuropeanPortugueseVoice(window.speechSynthesis.getVoices(), handlers.voiceGender);
+    const portugalVoice = findEuropeanPortugueseVoice(window.speechSynthesis.getVoices(), gender);
     if (!portugalVoice) {
       if (reportFailure) handlers.onError?.();
       return false;
@@ -116,6 +144,7 @@ export function speakEuropeanPortuguese(text: string, handlers: SpeechHandlers =
 
 export function SpeechButton({ text, onListen, label = "Listen", voiceGender }: SpeechButtonProps) {
   const [speaking, setSpeaking] = useState(false);
+  const resolvedVoiceGender = resolvePortugueseVoiceGender(text, voiceGender);
 
   const handleSpeak = () => {
     speakEuropeanPortuguese(text, {
@@ -133,7 +162,7 @@ export function SpeechButton({ text, onListen, label = "Listen", voiceGender }: 
     <button
       type="button"
       onClick={handleSpeak}
-      aria-label={`${label}${voiceGender ? ` with a ${voiceGender} European Portuguese voice` : ""}`}
+      aria-label={`${label} with a ${resolvedVoiceGender} European Portuguese voice`}
       className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
         speaking
           ? "border-clay bg-clay text-white"
