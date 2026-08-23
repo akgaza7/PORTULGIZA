@@ -248,7 +248,7 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
                   onClick={() => setOpenReview((current) => current === "correct" ? null : "correct")}
                   className="inline-flex min-h-11 items-center gap-2 rounded-full bg-portugalGreen px-5 py-2 font-display text-lg font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
                 >
-                  Correct Answers
+                  Correct answers
                   <span aria-hidden="true">{openReview === "correct" ? "↑" : "↓"}</span>
                 </button>
               </h3>
@@ -270,9 +270,9 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
                   aria-expanded={openReview === "practice"}
                   aria-controls="needs-practice-list"
                   onClick={() => setOpenReview((current) => current === "practice" ? null : "practice")}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-portugalRed px-5 py-2 font-display text-lg font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalRed"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-portugalBlue px-5 py-2 font-display text-lg font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalBlue"
                 >
-                  Continue Practising
+                  Try again
                   <span aria-hidden="true">{openReview === "practice" ? "↑" : "↓"}</span>
                 </button>
               </h3>
