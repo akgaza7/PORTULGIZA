@@ -44,7 +44,7 @@ function createPhraseQuiz(phrases: LessonPhrase[]): QuizQuestion[] {
   const portugueseQuestions = phrases.map((phrase, index) => {
     const choices = optionPhrases(index);
     return {
-      prompt: `Which Portuguese phrase means “${phrase.english}”?`,
+      prompt: `How do you say ${phrase.english.toUpperCase()}?`,
       options: choices.map((choice) => choice.portuguese),
       answer: phrase.portuguese,
       audioByOption: Object.fromEntries(

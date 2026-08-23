@@ -185,15 +185,14 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
     <section className="card-surface p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-portugalGreen/70">Quiz</p>
-          <h3 className="text-2xl font-semibold">End-of-lesson check</h3>
+          <p className="text-lg font-bold uppercase tracking-[0.16em] text-black">QUIZ</p>
         </div>
         <div className="w-full max-w-xs">
           <ProgressStrip value={currentIndex + 1} max={questions.length} label="Questions" tone="beginner" />
         </div>
       </div>
 
-      <h4 className="mt-6 text-xl font-semibold">{current.prompt}</h4>
+      <h4 className="mt-8 text-xl font-semibold">{current.prompt}</h4>
       <div className="mt-3 rounded-2xl border border-portugalGold/30 bg-portugalGold/10 p-3 text-sm leading-6 text-ink/70" role="note">
         Choose an answer and listen to its European Portuguese audio. You may change your choice before submitting. Once submitted, the answer is final and you cannot return to this question.
       </div>
