@@ -40,7 +40,7 @@ export default async function AccountPage() {
   if (!isSupabaseConfigured()) {
     return (
       <main className="page-shell py-10 sm:py-16">
-        <Link href="/" className="text-sm font-semibold text-ocean hover:text-ink">← Back to Portulgiza</Link>
+        <Link href="/" className="text-sm font-semibold text-ocean hover:text-ink">← Back</Link>
         <div className="mt-6"><ConnectedStudentProgressDashboard /></div>
         <section className="card-surface mx-auto mt-8 max-w-2xl p-7 sm:p-10">
           <p className="eyebrow">Subscriber account</p>
@@ -71,7 +71,7 @@ export default async function AccountPage() {
   return (
     <main className="page-shell py-8 sm:py-12">
       <div className="flex items-center justify-between gap-4">
-        <Link href="/" className="text-sm font-semibold text-ocean hover:text-ink">← Back to lessons</Link>
+        <Link href="/" className="text-sm font-semibold text-ocean hover:text-ink">← Back</Link>
         <SignOutButton />
       </div>
       <div className="mt-6"><ConnectedStudentProgressDashboard /></div>

@@ -85,7 +85,7 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
   return (
     <main className="page-shell learning-page">
       <Link href="/" className="text-sm font-semibold text-portugalGreen transition hover:text-ink">
-        ← Back to home
+        ← Back
       </Link>
 
       <div className="mt-4">
