@@ -117,7 +117,7 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
 
   const choosePortuguese = (index: number) => {
     speakEuropeanPortuguese(corePhrases[index].portuguese, {
-      voiceGender: avatar === "female" ? "feminine" : "masculine"
+      voiceGender: corePhrases[index].genderCue?.gender ?? (avatar === "female" ? "feminine" : "masculine")
     });
 
     if (selectedEnglish !== null) {
@@ -194,7 +194,9 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
           <p className="mt-4 rounded-xl bg-sand/70 px-3 py-2 text-sm text-ink/65" aria-live="polite">{feedback}</p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-portugalGreen">Portuguese</p>
+              {lessonSlug === "greetings" ? null : (
+                <p className="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-portugalGreen">Portuguese</p>
+              )}
               <div className={`grid gap-3 ${lessonSlug === "greetings" ? "lg:grid-cols-3" : ""}`}>
                 {portugueseGroups.map((group) => (
                   <section
@@ -233,7 +235,7 @@ export function CoreWordMatch({ phrases, lessonSlug, title, coreLabel, itemLabel
                             onClick={() => choosePortuguese(index)}
                             disabled={incorrectPair !== null}
                             aria-pressed={selectedPortuguese === index}
-                            aria-label={`${phrase.portuguese}. Hear ${selectedAvatar.name} say it and select this Portuguese word.`}
+                            aria-label={`${phrase.portuguese}. Hear ${phrase.genderCue?.gender === "masculine" ? avatarDetails.male.name : phrase.genderCue?.gender === "feminine" ? avatarDetails.female.name : selectedAvatar.name} say it and select this Portuguese word.`}
                             data-portuguese-voice-managed="true"
                             className={`min-h-11 rounded-full border px-4 py-2 text-sm font-bold transition ${selectedPortuguese === index ? "border-portugalGreen bg-portugalGreen text-white" : "border-portugalGreen/20 bg-white/70 text-portugalGreen hover:bg-portugalGreen/10"} ${incorrectPair?.portugueseIndex === index ? "match-error-shake border-portugalRed bg-portugalRed text-white" : ""}`}
                             lang="pt-PT"
