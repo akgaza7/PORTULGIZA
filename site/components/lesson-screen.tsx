@@ -31,7 +31,7 @@ const lessonColours = {
 };
 
 export function LessonScreen({ lesson }: LessonScreenProps) {
-  const { progress, setProgress, ready } = useProgressState();
+  const { progress, setProgress, ready, subscriptionStatus } = useProgressState();
   const colours = lessonColours;
   const lessonProgress = calculateLessonProgress(progress, lesson.slug);
 
@@ -60,7 +60,7 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
       </Link>
 
       <div className="mt-4">
-        <StudentProgressDashboard progress={progress} ready={ready} />
+        <StudentProgressDashboard progress={progress} subscriptionStatus={subscriptionStatus} />
       </div>
 
       <section className="mt-6">

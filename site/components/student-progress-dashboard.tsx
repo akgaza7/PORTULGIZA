@@ -6,7 +6,6 @@ import { sentenceBanks } from "@/components/translate-crisis-game";
 import { useAvatarPreference } from "@/lib/avatar-preference";
 import { lessons } from "@/lib/lesson-data";
 import {
-  calculateCourseMastery,
   getAnswerReview,
   type AppProgress,
   type LearningAnswer,
@@ -15,7 +14,7 @@ import {
 
 type StudentProgressDashboardProps = {
   progress: AppProgress;
-  ready: boolean;
+  subscriptionStatus?: string | null;
 };
 
 const activityLabels: Record<LearningAnswer["activity"], string> = {
@@ -130,12 +129,11 @@ function AnswerList({ answers, emptyMessage, needsPractice = false }: {
   );
 }
 
-export function StudentProgressDashboard({ progress, ready }: StudentProgressDashboardProps) {
+export function StudentProgressDashboard({ progress, subscriptionStatus }: StudentProgressDashboardProps) {
   const [openReview, setOpenReview] = useState<"correct" | "practice" | null>(null);
   const reviewPanelsRef = useRef<HTMLDivElement>(null);
-  const mastery = calculateCourseMastery(progress, lessons.map((lesson) => lesson.slug));
   const answers = getAnswerReview(progress);
-  const hasDetailedProgress = ready && answers.correct.length + answers.needsPractice.length > 0;
+  const learningLevel = subscriptionStatus === "active" ? "STURDY" : "START";
   useEffect(() => {
     if (!openReview) return;
 
@@ -160,41 +158,16 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
         />
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <h2 id="student-progress-heading" className="font-display text-2xl font-bold sm:text-3xl">
-            DASHBOARD
-          </h2>
-        </div>
-        <span className="w-fit rounded-full border border-portugalGold/50 bg-portugalGold/35 px-4 py-2 text-sm font-bold text-black">
-          {ready ? mastery.score : 0}/100 progress
-        </span>
+      <div>
+        <h2 id="student-progress-heading" className="font-display text-2xl font-bold sm:text-3xl">
+          DASHBOARD
+        </h2>
       </div>
 
-      <div className="mt-4">
-        <div className="rounded-[1.25rem] bg-portugalGreen p-3 text-white">
-          <p className="metric-label text-white/75">Progress level</p>
-          <p className="mt-2 font-display text-xl font-bold leading-snug">{ready ? mastery.score : 0}/100</p>
-        </div>
+      <div className="mt-4 border-l-4 border-portugalGreen pl-4">
+        <p className="metric-label text-ink/55">Learning level</p>
+        <p className="mt-1 font-display text-2xl font-bold leading-snug text-portugalGreen">{learningLevel}</p>
       </div>
-
-      {hasDetailedProgress ? (
-        <div className="mt-4 grid grid-cols-2 gap-2 text-center sm:grid-cols-3 lg:grid-cols-6">
-          {[
-            ["Quiz", mastery.breakdown.quiz],
-            ["Retention", mastery.breakdown.retention],
-            ["Practice", mastery.breakdown.practice],
-            ["Sentences", mastery.breakdown.sentenceBuilding],
-            ["Completion", mastery.breakdown.completion],
-            ["Consistency", mastery.breakdown.consistency]
-          ].map(([label, value]) => (
-            <div key={label} className="rounded-2xl bg-sand/75 p-3">
-              <p className="text-lg font-bold text-ink">{value}%</p>
-              <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-ink/50">{label}</p>
-            </div>
-          ))}
-        </div>
-      ) : null}
 
       <div ref={reviewPanelsRef} className="mt-4 grid items-start gap-3 md:grid-cols-2">
         <div className="rounded-[1.5rem] border border-portugalGreen/15 bg-portugalGreen/5 p-3 sm:p-4">
@@ -254,6 +227,6 @@ export function StudentProgressDashboard({ progress, ready }: StudentProgressDas
 }
 
 export function ConnectedStudentProgressDashboard() {
-  const { progress, ready } = useProgressState();
-  return <StudentProgressDashboard progress={progress} ready={ready} />;
+  const { progress, subscriptionStatus } = useProgressState();
+  return <StudentProgressDashboard progress={progress} subscriptionStatus={subscriptionStatus} />;
 }

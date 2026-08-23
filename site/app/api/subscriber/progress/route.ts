@@ -12,9 +12,19 @@ export async function GET() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return unauthorised();
 
-  const { data, error } = await supabase.from("learning_progress").select("progress,mastery_score,updated_at").eq("user_id", user.id).maybeSingle();
-  if (error) return NextResponse.json({ error: "Progress could not be loaded." }, { status: 500 });
-  return NextResponse.json(data ?? { progress: null, mastery_score: 0, updated_at: null });
+  const [progressResult, subscriberResult] = await Promise.all([
+    supabase.from("learning_progress").select("progress,mastery_score,updated_at").eq("user_id", user.id).maybeSingle(),
+    supabase.from("subscribers").select("subscription_status").eq("user_id", user.id).maybeSingle()
+  ]);
+
+  if (progressResult.error || subscriberResult.error) {
+    return NextResponse.json({ error: "Progress could not be loaded." }, { status: 500 });
+  }
+
+  return NextResponse.json({
+    ...(progressResult.data ?? { progress: null, mastery_score: 0, updated_at: null }),
+    subscription_status: subscriberResult.data?.subscription_status ?? null
+  });
 }
 
 export async function PUT(request: NextRequest) {

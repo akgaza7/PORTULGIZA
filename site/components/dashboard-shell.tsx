@@ -39,7 +39,7 @@ const coreMatchLabels: Record<
 };
 
 export function DashboardShell() {
-  const { progress, setProgress, ready } = useProgressState();
+  const { progress, setProgress, subscriptionStatus } = useProgressState();
   const [openLesson, setOpenLesson] = useState<CategoryLesson["slug"] | "greeting-responses" | "food-conversations" | "numbers-in-sentences" | null>(null);
 
   return (
@@ -126,7 +126,7 @@ export function DashboardShell() {
         </div>
       </section>
 
-      <StudentProgressDashboard progress={progress} ready={ready} />
+      <StudentProgressDashboard progress={progress} subscriptionStatus={subscriptionStatus} />
 
       <section id="learn" className="mt-14 scroll-mt-6 pb-6">
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
