@@ -13,7 +13,6 @@ import { TranslateCrisisGame } from "@/components/translate-crisis-game";
 import { getLearningAccess } from "@/lib/learning-access";
 import type { CategoryLesson } from "@/lib/lesson-data";
 import {
-  calculateLessonProgress,
   markAnswerAttempt,
   markLessonActivity,
   markPracticeActivity,
@@ -25,16 +24,8 @@ type LessonScreenProps = {
   lesson: CategoryLesson;
 };
 
-const lessonColours = {
-  bar: "bg-portugalGreen",
-  note: "border-portugalGreen/15 bg-portugalGreen/10",
-  noteTitle: "text-portugalGreen"
-};
-
 export function LessonScreen({ lesson }: LessonScreenProps) {
   const { progress, setProgress, ready, subscriptionStatus, trialEndsAt } = useProgressState();
-  const colours = lessonColours;
-  const lessonProgress = calculateLessonProgress(progress, lesson.slug);
   const access = getLearningAccess(progress, subscriptionStatus, trialEndsAt);
 
   const handleQuizComplete = (score: number) => {
@@ -93,52 +84,10 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
       </div>
 
       <section className="mt-6">
-        <div className="card-surface relative overflow-hidden p-6 sm:p-8">
-          <div className={`absolute inset-x-0 top-0 h-1.5 ${colours.bar}`} />
-          <div className="flex flex-wrap items-center gap-3">
-            <p className="text-sm uppercase tracking-[0.24em] text-portugalGreen/70">{lesson.subtitle}</p>
-            <span className="rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
-              Start Here
-            </span>
-          </div>
-          <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <h1 className="text-4xl font-semibold">{lesson.title}</h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-ink/72">{lesson.description}</p>
-            </div>
-            <div className={`rounded-3xl border px-4 py-3 text-sm ${colours.note}`}>
-              <p className={`font-semibold ${colours.noteTitle}`}>Accent note</p>
-              <p className="mt-1 max-w-xs text-ink/72">{lesson.accentHint}</p>
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-3xl bg-white p-4">
-              <p className="text-sm text-ink/60">Lesson progress</p>
-              <p className="mt-2 text-3xl font-semibold">{lessonProgress}/4</p>
-              <p className="mt-1 text-xs font-medium text-ocean">
-                {lessonProgress === 0 ? "Not started" : lessonProgress === 4 ? "Complete" : "In progress"}
-              </p>
-            </div>
-            <div className="rounded-3xl bg-portugalGreen p-4 text-white">
-              <p className="text-sm text-white/65">Streak</p>
-              <p className="mt-2 text-3xl font-semibold">
-                {ready
-                  ? progress.streak === 0
-                    ? "Not started"
-                    : progress.streak === 1
-                      ? "Started today"
-                      : `${progress.streak}-day streak`
-                  : "--"}
-              </p>
-            </div>
-            <div className="rounded-3xl bg-portugalGold/30 p-4">
-              <p className="text-sm text-ink/60">Best score</p>
-              <p className="mt-2 text-3xl font-semibold">{progress.completedLessons[lesson.slug]?.bestScore ?? 0}%</p>
-            </div>
-          </div>
+        <div className="card-surface p-6 sm:p-8">
+          <p className="text-sm font-bold uppercase tracking-[0.24em] text-portugalGreen">START</p>
+          <h1 className="mt-5 text-4xl font-semibold">{lesson.title}</h1>
         </div>
-
       </section>
 
       <section
