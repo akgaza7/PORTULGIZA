@@ -166,7 +166,11 @@ export function DashboardShell() {
                 >
                   <span>
                     <span className="block font-display text-2xl font-bold text-ink sm:text-3xl">
-                      {lesson.title}: <span className="text-portugalGreen">{labels.objective}</span>
+                      {lesson.title}{lesson.slug === "greetings" ? (
+                        <span className="mt-1 block text-portugalGreen">Match the words</span>
+                      ) : (
+                        <>: <span className="text-portugalGreen">{labels.objective}</span></>
+                      )}
                     </span>
                     {lesson.slug === "greetings" ? null : <span className="mt-1 block text-sm text-ink/55">{labels.coreLabel}</span>}
                   </span>
