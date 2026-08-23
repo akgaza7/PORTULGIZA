@@ -124,7 +124,7 @@ export function DashboardShell() {
             </div>
           )}
         </div>
-        <p className="mt-3 text-xs text-muted">SMOOTH and STURDY unlock after START is passed and the £4.99 monthly subscription is active.</p>
+        <p className="mt-3 text-xs text-muted">Subscribe and when you complete START the next level will open.</p>
         </section>
       </div>
 
