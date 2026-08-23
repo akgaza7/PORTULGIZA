@@ -134,8 +134,9 @@ export function Flashcards({ phrases, onPractice, onListen, onAnswer }: Flashcar
         <p className="mt-2 max-w-xl text-xs text-white/75 sm:text-sm">{current.tip}</p>
       </div>
 
-      <h3 className="mt-4 text-2xl font-semibold text-ink">Choose the meaning</h3>
-      <div className="mt-3 grid gap-3" aria-label="Choose one meaning">
+      <h3 className="mt-4 text-2xl font-semibold text-ink">Hello</h3>
+      <p className="mt-1 text-sm text-ink/60">Choose your answer below</p>
+      <div className="mt-3 grid gap-3" aria-label="Choose your answer below">
         {options.map((option, optionIndex) => {
           const selected = state.selected === option;
           const correctOption = state.revealed && option === current.english;
