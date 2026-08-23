@@ -79,7 +79,7 @@ function createBeginnerLesson(input: Omit<LessonSeed, "quiz">): LessonSeed {
 }
 
 const beginnerLessonSeeds: LessonSeed[] = [
-  {
+  createBeginnerLesson({
     slug: "greetings",
     title: "Greetings",
     subtitle: "Polite everyday hellos",
@@ -97,13 +97,8 @@ const beginnerLessonSeeds: LessonSeed[] = [
       { portuguese: "De nada", english: "You're welcome", tip: "A common reply after someone thanks you." },
       { portuguese: "Adeus", english: "Goodbye", tip: "A standard way to say goodbye." }
     ],
-    quiz: [
-      { prompt: "How do you say 'Good morning'?", options: ["Boa tarde", "Bom dia", "Boa noite", "Olá"], answer: "Bom dia" },
-      { prompt: "Which phrase is a polite way to ask 'How are you?'", options: ["Como está?", "Até logo", "Obrigado", "Desculpe"], answer: "Como está?" },
-      { prompt: "Which phrase works for evening or bedtime?", options: ["Boa noite", "Bom dia", "Muito bem", "Até amanhã"], answer: "Boa noite" }
-    ],
-  },
-  {
+  }),
+  createBeginnerLesson({
     slug: "numbers",
     title: "Numbers",
     subtitle: "Counting with confidence",
@@ -121,13 +116,8 @@ const beginnerLessonSeeds: LessonSeed[] = [
       { portuguese: "nove", english: "nine", tip: "Keep the final vowel light in European Portuguese." },
       { portuguese: "dez", english: "ten", tip: "A common number for prices and time." }
     ],
-    quiz: [
-      { prompt: "What is 'three' in Portuguese?", options: ["dois", "cinco", "três", "quatro"], answer: "três" },
-      { prompt: "Which word means 'five'?", options: ["quatro", "cinco", "um", "seis"], answer: "cinco" },
-      { prompt: "What is 'two' in Portuguese?", options: ["dois", "dez", "três", "nove"], answer: "dois" }
-    ],
-  },
-  {
+  }),
+  createBeginnerLesson({
     slug: "food",
     title: "Food",
     subtitle: "Core food and drink words",
@@ -145,13 +135,8 @@ const beginnerLessonSeeds: LessonSeed[] = [
       { portuguese: "arroz", english: "rice", tip: "A common part of Portuguese meals.", genderCue: { gender: "masculine", appliesTo: "noun", word: "arroz", explanation: "Arroz is a masculine noun: o arroz." } },
       { portuguese: "peixe", english: "fish", tip: "A useful menu word in Portugal.", genderCue: { gender: "masculine", appliesTo: "noun", word: "peixe", explanation: "Peixe is a masculine noun: o peixe." } }
     ],
-    quiz: [
-      { prompt: "What does 'água' mean?", options: ["bread", "water", "juice", "milk"], answer: "water" },
-      { prompt: "Which word means 'bread'?", options: ["queijo", "pão", "café", "sopa"], answer: "pão" },
-      { prompt: "Which word means 'fish'?", options: ["arroz", "chá", "peixe", "leite"], answer: "peixe" }
-    ],
-  },
-  {
+  }),
+  createBeginnerLesson({
     slug: "travel",
     title: "Travel",
     subtitle: "Getting around in Portugal",
@@ -169,12 +154,7 @@ const beginnerLessonSeeds: LessonSeed[] = [
       { portuguese: "Quanto custa o bilhete?", english: "How much does the ticket cost?", tip: "Useful before buying a ticket.", genderCue: { gender: "masculine", appliesTo: "noun", word: "bilhete", explanation: "Bilhete is a masculine noun, so say o bilhete." } },
       { portuguese: "Preciso de um táxi", english: "I need a taxi", tip: "Useful at a station, airport, or hotel.", genderCue: { gender: "masculine", appliesTo: "noun", word: "táxi", explanation: "Táxi is a masculine noun, so say um táxi." } }
     ],
-    quiz: [
-      { prompt: "How do you say 'ticket'?", options: ["reserva", "estação", "bilhete", "viagem"], answer: "bilhete" },
-      { prompt: "What does 'À direita' mean?", options: ["straight ahead", "to the left", "to the right", "next to"], answer: "to the right" },
-      { prompt: "Which phrase means 'I have a reservation'?", options: ["Tenho uma reserva", "Onde fica a estação?", "Boa noite", "A conta, por favor"], answer: "Tenho uma reserva" }
-    ],
-  },
+  }),
   createBeginnerLesson({
     slug: "introductions",
     title: "Introductions",
