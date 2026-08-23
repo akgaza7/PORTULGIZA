@@ -150,7 +150,6 @@ export function QuizPanel({ questions, phraseBuilderComplete, onComplete, onList
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-portugalRed">Needs practice</p>
-                <h4 className="mt-1 font-display text-2xl font-bold">Practise these next</h4>
               </div>
               <span className="rounded-full bg-portugalRed px-3 py-1 text-xs font-bold text-white">{practiceItems.length}</span>
             </div>
