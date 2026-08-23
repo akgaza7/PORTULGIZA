@@ -6,6 +6,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { AvatarChoice } from "@/components/avatar-choice";
 import { CoreWordMatch } from "@/components/greeting-word-match";
 import { GreetingResponseGuide } from "@/components/greeting-response-guide";
+import { GreetingVocabularyGuide } from "@/components/greeting-vocabulary-guide";
 import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
 import { lessons, type CategoryLesson } from "@/lib/lesson-data";
 import { markAnswerAttempt, markPracticeActivity, useProgressState } from "@/lib/storage";
@@ -206,6 +207,9 @@ export function DashboardShell() {
                   </div>
                 ) : null}
               </div>
+              {lesson.slug === "greetings" ? (
+                <GreetingVocabularyGuide />
+              ) : null}
               {lesson.slug === "greetings" ? (
                 <div className="overflow-hidden rounded-[1.75rem] border border-portugalGreen/20 bg-white/90 shadow-soft">
                   <button
