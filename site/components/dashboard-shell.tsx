@@ -49,7 +49,7 @@ export function DashboardShell() {
       <div className="mb-6 flex items-center justify-end gap-3">
         <div className="flex items-center gap-3">
           <Link
-            href="/account"
+            href="/sign-in"
             className="hidden rounded-full border border-ocean/15 bg-white px-4 py-2.5 text-sm font-semibold text-ocean transition hover:border-ocean/35 hover:text-ink sm:inline-flex"
           >
             Subscriber&apos;s log in
