@@ -38,17 +38,7 @@ function formatDate(value: string | null) {
 
 export default async function AccountPage() {
   if (!isSupabaseConfigured()) {
-    return (
-      <main className="page-shell py-10 sm:py-16">
-        <Link href="/" className="text-sm font-semibold text-ocean hover:text-ink">← Back</Link>
-        <div className="mt-6"><ConnectedStudentProgressDashboard /></div>
-        <section className="card-surface mx-auto mt-8 max-w-2xl p-7 sm:p-10">
-          <p className="eyebrow">Subscriber account</p>
-          <h1 className="mt-3 font-display text-4xl font-bold">Ready to connect</h1>
-          <p className="mt-4 leading-7 text-ink/65">The account system is built locally. Add your Supabase public project values and apply the included database migration to activate subscriber accounts.</p>
-        </section>
-      </main>
-    );
+    redirect("/sign-in");
   }
 
   const supabase = await createClient();
