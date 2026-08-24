@@ -71,7 +71,7 @@ export function DashboardShell() {
 
         <section className="card-surface p-5 sm:p-6" aria-label="Lessons">
         <div className="mb-5">
-          <p className="eyebrow">Lessons</p>
+          <p className="eyebrow text-[0.8175rem]">Lessons</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
           {access.canAccessStart ? (
@@ -80,7 +80,7 @@ export function DashboardShell() {
               aria-label="Open the START lesson plan"
               className="rounded-[1.5rem] border border-portugalGreen/20 bg-portugalGreen/10 p-4 transition hover:-translate-y-0.5 hover:border-portugalGreen/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
             >
-              <span className="inline-flex rounded-full bg-portugalGreen px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">START</span>
+              <span className="inline-flex rounded-full bg-portugalGreen px-3 py-1 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-white">START</span>
               {access.isTrialActive ? <p className="mt-3 text-sm font-semibold text-portugalGreen">14-day trial access</p> : null}
             </Link>
           ) : (
@@ -88,7 +88,7 @@ export function DashboardShell() {
               href="/sign-up"
               className="rounded-[1.5rem] border border-portugalGreen/15 bg-portugalGreen/5 p-4 transition hover:border-portugalGreen/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
             >
-              <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-portugalGreen">
+              <span className="flex items-center justify-between gap-2 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-portugalGreen">
                 START <span aria-hidden="true">🔒</span>
               </span>
               <p className="mt-3 text-sm font-semibold text-portugalGreen">Start your 14-day trial</p>
@@ -100,14 +100,13 @@ export function DashboardShell() {
               aria-label="Open the SMOOTH lesson plan"
               className="rounded-[1.5rem] border border-portugalBlue/20 bg-portugalBlue/5 p-4 transition hover:-translate-y-0.5 hover:border-portugalBlue/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalBlue"
             >
-              <span className="inline-flex rounded-full bg-portugalBlue px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">SMOOTH</span>
+              <span className="inline-flex rounded-full bg-portugalBlue px-3 py-1 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-white">SMOOTH</span>
             </Link>
           ) : (
             <div aria-disabled="true" className="cursor-not-allowed rounded-[1.5rem] border border-portugalBlue/15 bg-portugalBlue/[0.03] p-4 opacity-70">
-              <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-portugalBlue">
+              <span className="flex items-center justify-between gap-2 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-portugalBlue">
                 SMOOTH <span aria-hidden="true">🔒</span>
               </span>
-              <p className="mt-3 text-sm font-semibold text-portugalBlue">Pass START and subscribe</p>
             </div>
           )}
           {access.canAccessSturdy ? (
@@ -116,11 +115,11 @@ export function DashboardShell() {
               aria-label="Open the STURDY lesson plan"
               className="rounded-[1.5rem] border border-portugalGold bg-portugalGold p-4 text-black transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGold"
             >
-              <span className="inline-flex rounded-full border border-black/15 bg-white/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-black">STURDY</span>
+              <span className="inline-flex rounded-full border border-black/15 bg-white/30 px-3 py-1 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-black">STURDY</span>
             </Link>
           ) : (
             <div aria-disabled="true" className="cursor-not-allowed rounded-[1.5rem] border border-portugalGold bg-portugalGold p-4 text-black opacity-60">
-              <span className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-black">
+              <span className="flex items-center justify-between gap-2 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-black">
                 STURDY <span aria-hidden="true">🔒</span>
               </span>
               <p className="mt-3 text-sm font-semibold text-black">Pass START and subscribe</p>
