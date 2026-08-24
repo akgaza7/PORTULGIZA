@@ -125,6 +125,7 @@ export function DashboardShell() {
             </div>
           )}
         </div>
+        <p className="mt-3 text-sm text-ink/70">When you subscribe all lessons will be available.</p>
         </section>
       </div>
 
