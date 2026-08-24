@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { DailyLearningCatchups } from "@/components/daily-learning-catchups";
 import { Flashcards } from "@/components/flashcards";
 import { GenderCoach, GenderedPhrase } from "@/components/gender-coach";
 import { ListeningMatch } from "@/components/listening-match";
@@ -89,6 +90,8 @@ export function LessonScreen({ lesson }: LessonScreenProps) {
           <h1 className="mt-5 text-4xl font-semibold">{lesson.title}</h1>
         </div>
       </section>
+
+      <DailyLearningCatchups />
 
       <section
         id="core-phrases"
