@@ -6,7 +6,10 @@ import { usePathname } from "next/navigation";
 export function PageFooterNavigation() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-  const showDashboard = pathname === "/dashboard" || pathname === "/account" || pathname.startsWith("/lesson/");
+  const isTrialRegistrationPage = pathname === "/sign-up" || pathname.startsWith("/sign-up/");
+  const showDashboard = !isTrialRegistrationPage && (
+    pathname === "/dashboard" || pathname === "/account" || pathname.startsWith("/lesson/")
+  );
 
   const backToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
