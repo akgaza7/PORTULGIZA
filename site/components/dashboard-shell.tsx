@@ -127,6 +127,24 @@ export function DashboardShell() {
         </section>
       </div>
 
+      <section className="mb-6 rounded-[2.25rem] border border-portugalGold/35 bg-[#F8E7D4] p-6 shadow-soft sm:p-8 lg:p-10" aria-labelledby="start-trial-heading">
+        <h1 id="start-trial-heading" className="max-w-5xl text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-5xl">
+          Lessons begin with <span className="text-portugalGreen">START</span>—your free 14-day European Portuguese learning time, with no credit card required. Learn essential words for daily life.
+        </h1>
+
+        <div className="mt-7 grid gap-5 text-lg font-bold leading-relaxed text-ink/85 sm:text-xl lg:grid-cols-3">
+          <p>
+            Your learning is tracked by your dashboard. Your progress will show what you know and highlight what needs a quick replay.
+          </p>
+          <p>
+            You will also receive daily learning prompts by email and can opt out if you wish.
+          </p>
+          <p>
+            Once the trial ends, you can subscribe for £4.99 a month. The lessons will progress to higher, more dynamic levels that build your language skills. Cancel anytime.
+          </p>
+        </div>
+      </section>
+
       {ready && access.canAccessStart ? (
       <section id="learn" className="mt-6 scroll-mt-6 pb-6">
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
