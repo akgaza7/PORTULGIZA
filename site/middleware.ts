@@ -1,11 +1,8 @@
 import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import { auth0 } from "@/lib/auth0";
-import { isAuth0Configured } from "@/lib/auth0-config";
+import { updateSession } from "@/lib/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
-  if (!isAuth0Configured()) return NextResponse.next();
-  return auth0.middleware(request);
+  return updateSession(request);
 }
 
 export const config = {
