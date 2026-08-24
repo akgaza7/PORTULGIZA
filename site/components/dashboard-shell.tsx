@@ -73,7 +73,7 @@ export function DashboardShell() {
           <p className="eyebrow text-base font-extrabold">Lessons</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
             {access.canAccessStart ? (
               <Link
                 href="/#learn"
