@@ -34,6 +34,14 @@ export function AuthForm({ mode, configured }: AuthFormProps) {
           {isSignUp ? "Start free trial" : "Sign in"}
         </span>
       )}
+      {!isSignUp && configured ? (
+        <a
+          href="/forgot-password"
+          className="mt-5 inline-flex font-semibold text-ocean underline decoration-ocean/35 underline-offset-4 transition hover:text-ink"
+        >
+          Forgot password?
+        </a>
+      ) : null}
     </section>
   );
 }
