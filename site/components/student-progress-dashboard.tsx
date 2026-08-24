@@ -6,6 +6,7 @@ import { sentenceBanks } from "@/components/translate-crisis-game";
 import { useAvatarPreference } from "@/lib/avatar-preference";
 import { lessons } from "@/lib/lesson-data";
 import {
+  calculateCourseMastery,
   getAnswerReview,
   type AppProgress,
   type LearningAnswer,
@@ -136,6 +137,7 @@ export function StudentProgressDashboard({ progress, subscriptionStatus }: Stude
   const answers = getAnswerReview(progress);
   const startPassed = lessons.every((lesson) => progress.completedLessons[lesson.slug]?.completed === true);
   const learningLevel = subscriptionStatus === "active" && startPassed ? "STURDY" : "START";
+  const masteryScore = calculateCourseMastery(progress, lessons.map((lesson) => lesson.slug)).score;
   useEffect(() => {
     if (!openReview) return;
 
@@ -155,24 +157,34 @@ export function StudentProgressDashboard({ progress, subscriptionStatus }: Stude
       className="mx-auto w-full max-w-5xl scroll-mt-6 overflow-hidden rounded-[2rem] border border-[#E7D1B6] bg-[#F8E7D4] p-4 shadow-soft sm:p-5"
       aria-labelledby="student-progress-heading"
     >
-      <div className="relative -mx-4 -mt-4 mb-5 flex h-2 overflow-visible sm:-mx-5 sm:-mt-5" aria-hidden="true">
-        <span className="w-2/5 bg-portugalGreen" />
-        <span className="w-3/5 bg-portugalRed" />
-        <span
-          className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-portugalGold shadow-sm"
-          style={{ left: "40%" }}
-        />
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div>
         <h2 id="student-progress-heading" className="font-display text-2xl font-bold sm:text-3xl">
           DASHBOARD
         </h2>
         <div
-          className="rounded-full bg-portugalGreen px-5 py-3 text-white"
+          className="mt-3 inline-flex rounded-full bg-portugalGreen px-5 py-3 text-white"
           aria-label={`Current learning level: ${learningLevel}`}
         >
           <p className="font-display text-lg font-bold leading-none sm:text-xl">{learningLevel}</p>
+        </div>
+      </div>
+
+      <div className="mt-4" aria-label={`Learning progress: ${masteryScore} out of 100`}>
+        <div className="mb-2 flex items-center justify-between gap-3 text-sm font-semibold text-ink/70">
+          <span>Progress</span>
+          <span>{masteryScore}/100</span>
+        </div>
+        <div
+          className="h-3 overflow-hidden rounded-full bg-white/80"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={masteryScore}
+        >
+          <div
+            className="h-full rounded-full bg-portugalGreen transition-[width] duration-500"
+            style={{ width: `${masteryScore}%` }}
+          />
         </div>
       </div>
 
