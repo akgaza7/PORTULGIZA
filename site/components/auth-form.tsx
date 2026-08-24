@@ -4,17 +4,17 @@ import { useState, type FormEvent } from "react";
 
 type AuthFormProps = {
   mode: "sign-in" | "sign-up";
-  configured: boolean;
 };
 
-export function AuthForm({ mode, configured }: AuthFormProps) {
+export function AuthForm({ mode }: AuthFormProps) {
   const isSignUp = mode === "sign-up";
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "expired" | "error">("idle");
   const [message, setMessage] = useState("");
 
   async function submitEmailLink(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const name = formData.get("name");
     const email = formData.get("email");
     const trimmedName = typeof name === "string" ? name.trim() : "";
@@ -33,7 +33,7 @@ export function AuthForm({ mode, configured }: AuthFormProps) {
         setMessage(body.message ?? "We could not send the email. Please try again.");
         return;
       }
-      event.currentTarget.reset();
+      form.reset();
       setStatus("sent");
       setMessage(body.message ?? "Check your email for your secure START link.");
     } catch {
@@ -59,21 +59,13 @@ export function AuthForm({ mode, configured }: AuthFormProps) {
           </label>
           <p className="text-sm leading-6 text-ink/65">We will email you a secure link. No password is needed.</p>
           {message ? <p role="status" className={`rounded-2xl p-4 text-sm font-semibold ${status === "expired" ? "bg-portugalYellow/35 text-ink" : status === "error" ? "bg-portugalRed/10 text-portugalRed" : "bg-portugalGreen/10 text-portugalGreen"}`}>{message}</p> : null}
-          {configured ? (
-            <button
-              type="submit"
-              className="inline-flex w-full items-center justify-center rounded-full bg-ocean px-5 py-3.5 font-semibold text-white transition hover:bg-ink"
-            >
-              {status === "sending" ? "Sending…" : "Email my login link"}
-            </button>
-          ) : (
-            <span
-              aria-disabled="true"
-              className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full bg-ocean/45 px-5 py-3.5 font-semibold text-white"
-            >
-              Sign in
-            </span>
-          )}
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="inline-flex w-full items-center justify-center rounded-full bg-ocean px-5 py-3.5 font-semibold text-white transition hover:bg-ink disabled:cursor-wait disabled:opacity-60"
+          >
+            {status === "sending" ? "Sending…" : "Email my login link"}
+          </button>
         </form>
       </section>
     );
@@ -109,21 +101,13 @@ export function AuthForm({ mode, configured }: AuthFormProps) {
             className="mt-2 w-full rounded-2xl border border-portugalGreen/25 bg-white px-4 py-3.5 font-normal outline-none transition focus:border-portugalGreen focus:ring-2 focus:ring-portugalGreen/15"
           />
         </label>
-        {configured ? (
-          <button
-            type="submit"
-            className="inline-flex w-full items-center justify-center rounded-full bg-portugalGreen px-5 py-3.5 font-semibold text-white transition hover:brightness-95"
-          >
-            {status === "sending" ? "Sending…" : "Email my START link"}
-          </button>
-        ) : (
-          <span
-            aria-disabled="true"
-            className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full bg-portugalGreen/45 px-5 py-3.5 font-semibold text-white"
-          >
-            Start free trial
-          </span>
-        )}
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="inline-flex w-full items-center justify-center rounded-full bg-portugalGreen px-5 py-3.5 font-semibold text-white transition hover:brightness-95 disabled:cursor-wait disabled:opacity-60"
+        >
+          {status === "sending" ? "Sending…" : "Start free trial"}
+        </button>
       </form>
     </section>
   );

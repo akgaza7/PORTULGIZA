@@ -7,13 +7,16 @@ import { createClient } from "@/lib/supabase/server";
 export async function GET(request: NextRequest) {
   const tokenHash = request.nextUrl.searchParams.get("token_hash");
   const type = request.nextUrl.searchParams.get("type") as EmailOtpType | null;
+  const code = request.nextUrl.searchParams.get("code");
   const requestedNext = request.nextUrl.searchParams.get("next") ?? "/lesson/greetings";
   const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/lesson/greetings";
-  if (!isSupabaseConfigured() || !tokenHash || !type) {
+  if (!isSupabaseConfigured() || (!code && (!tokenHash || !type))) {
     return NextResponse.redirect(new URL("/sign-in?error=invalid_link", request.url));
   }
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+  const { data, error } = code
+    ? await supabase.auth.exchangeCodeForSession(code)
+    : await supabase.auth.verifyOtp({ token_hash: tokenHash!, type: type! });
   if (error || !data.user) {
     return NextResponse.redirect(new URL("/sign-in?error=expired_link", request.url));
   }

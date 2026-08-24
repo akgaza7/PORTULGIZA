@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { isTrialEmailConfigured, sendPortulgizaEmail } from "@/lib/trial-email";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { createClient } from "@/lib/supabase/server";
 
 type RequestBody = { name?: unknown; email?: unknown; intent?: unknown };
 
@@ -9,7 +10,7 @@ function normaliseEmail(value: unknown) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!isTrialEmailConfigured()) {
+  if (!isSupabaseConfigured() || !process.env.SUPABASE_SECRET_KEY) {
     return NextResponse.json({ message: "START email registration is not configured yet." }, { status: 503 });
   }
   const body = await request.json().catch(() => null) as RequestBody | null;
@@ -37,28 +38,16 @@ export async function POST(request: NextRequest) {
 
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? request.nextUrl.origin).replace(/\/$/, "");
   const next = subscriber?.subscription_status === "active" ? "/dashboard" : "/lesson/greetings";
-  const { data, error } = await admin.auth.admin.generateLink({
-    type: "magiclink",
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { data: { full_name: name || subscriber?.full_name || "Learner" } }
+    options: {
+      shouldCreateUser: intent === "start",
+      emailRedirectTo: `${siteUrl}/auth/confirm?next=${encodeURIComponent(next)}`,
+      data: { full_name: name || subscriber?.full_name || "Learner" }
+    }
   });
-  const tokenHash = data.properties?.hashed_token;
-  if (error || !tokenHash) {
-    return NextResponse.json({ message: "We could not prepare your secure email link." }, { status: 500 });
-  }
-  const actionUrl = `${siteUrl}/auth/confirm?token_hash=${encodeURIComponent(tokenHash)}&type=magiclink&next=${encodeURIComponent(next)}`;
-  try {
-    await sendPortulgizaEmail({
-      to: email,
-      subject: intent === "start" ? "Begin with START EU Language Learning" : "Your secure Portulgiza login link",
-      heading: intent === "start" ? "Begin with START EU Language Learning" : "Continue your Portulgiza learning",
-      paragraphs: intent === "start"
-        ? [`Hello ${name || subscriber?.full_name || "Learner"},`, "Click the secure link below to verify your email and activate your 14-day START trial. Your trial begins only when you click it."]
-        : ["Click the secure link below to return to your lessons. This link confirms your email address."],
-      actionLabel: intent === "start" ? "Activate START" : "Open my lessons",
-      actionUrl
-    });
-  } catch {
+  if (error) {
     return NextResponse.json({ message: "We could not send your email. Please try again." }, { status: 502 });
   }
   return NextResponse.json({ message: "Check your email and click the secure link to activate START." });
