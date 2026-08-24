@@ -71,27 +71,31 @@ export function DashboardShell() {
         <section className="card-surface p-5 sm:p-6" aria-label="Lessons">
         <div className="mb-5">
           <p className="eyebrow text-base font-extrabold">Lessons</p>
-          <p className="mt-2 text-sm font-semibold text-ink/75">14-day trial — no card required</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
-          {access.canAccessStart ? (
-            <Link
-              href="/#learn"
-              aria-label="Open the START lesson plan"
-              className="rounded-[1.5rem] border border-portugalGreen bg-portugalGreen p-4 text-white transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
-            >
-              <span className="text-lg font-extrabold uppercase tracking-[0.14em] text-white">START</span>
-            </Link>
-          ) : (
-            <Link
-              href="/sign-up"
-              className="rounded-[1.5rem] border border-portugalGreen bg-portugalGreen p-4 text-white transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
-            >
-              <span className="flex items-center justify-between gap-2 text-lg font-extrabold uppercase tracking-[0.14em] text-white">
-                START <span aria-hidden="true">🔒</span>
-              </span>
-            </Link>
-          )}
+          <div className="flex flex-col gap-3">
+            {access.canAccessStart ? (
+              <Link
+                href="/#learn"
+                aria-label="Open the START lesson plan"
+                className="rounded-[1.5rem] border border-portugalGreen bg-portugalGreen p-4 text-white transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
+              >
+                <span className="text-lg font-extrabold uppercase tracking-[0.14em] text-white">START</span>
+              </Link>
+            ) : (
+              <Link
+                href="/sign-up"
+                className="rounded-[1.5rem] border border-portugalGreen bg-portugalGreen p-4 text-white transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
+              >
+                <span className="flex items-center justify-between gap-2 text-lg font-extrabold uppercase tracking-[0.14em] text-white">
+                  START <span aria-hidden="true">🔒</span>
+                </span>
+              </Link>
+            )}
+            <p className="px-2 text-sm font-bold leading-relaxed text-ink/80">
+              START is free for 14 days — no card required.
+            </p>
+          </div>
           {access.canAccessSmooth ? (
             <Link
               href="/lesson/greetings?level=Intermediate#translate-crisis-game"
