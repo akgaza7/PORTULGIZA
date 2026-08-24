@@ -70,7 +70,7 @@ export function DashboardShell() {
 
         <section className="card-surface p-5 sm:p-6" aria-label="Lessons">
         <div className="mb-5">
-          <p className="eyebrow text-base font-extrabold">Lessons</p>
+          <p className="eyebrow text-[1.18rem] font-extrabold">Lessons</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3" aria-label="Course levels">
           <div className="flex flex-col gap-1">
