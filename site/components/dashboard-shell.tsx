@@ -8,7 +8,6 @@ import { FoodConversationGuide } from "@/components/food-conversation-guide";
 import { GreetingResponseGuide } from "@/components/greeting-response-guide";
 import { GreetingVocabularyGuide } from "@/components/greeting-vocabulary-guide";
 import { NumbersInSentences } from "@/components/numbers-in-sentences";
-import { StudentProgressDashboard } from "@/components/student-progress-dashboard";
 import { getLearningAccess } from "@/lib/learning-access";
 import { lessons, type CategoryLesson } from "@/lib/lesson-data";
 import { markAnswerAttempt, markPracticeActivity, useProgressState } from "@/lib/storage";
@@ -280,8 +279,6 @@ export function DashboardShell() {
         </div>
       </section>
       ) : null}
-
-      <StudentProgressDashboard progress={progress} subscriptionStatus={subscriptionStatus} />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { HeaderActions } from "@/components/header-actions";
 import { PageFooterNavigation } from "@/components/page-footer-navigation";
 import { PortugueseVoiceLayer } from "@/components/portuguese-voice-layer";
 import "./globals.css";
@@ -40,21 +41,7 @@ export default function RootLayout({
               European Portuguese Language for daily use
             </p>
 
-            <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
-              <Link
-                href="/dashboard"
-                className="rounded-full border border-portugalGreen/25 bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-portugalGreen transition hover:border-portugalGreen hover:bg-portugalGreen/5 sm:px-5 sm:text-sm"
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/sign-up"
-                className="inline-flex flex-col items-center rounded-full border border-portugalGold/60 bg-portugalGold/35 px-4 py-2 text-xs font-bold uppercase leading-tight tracking-[0.1em] text-black transition hover:bg-portugalGold/55 sm:px-5 sm:text-sm"
-              >
-                <span>Subscribe £4.99</span>
-                <span className="mt-0.5 text-[0.6rem] tracking-[0.14em] text-black/65 sm:text-[0.65rem]">Monthly</span>
-              </Link>
-            </div>
+            <HeaderActions />
           </nav>
           <div className="mt-4">
             <p className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">

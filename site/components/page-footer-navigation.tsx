@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 export function PageFooterNavigation() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const showDashboard = pathname === "/dashboard" || pathname === "/account" || pathname.startsWith("/lesson/");
 
   const backToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -34,12 +35,14 @@ export function PageFooterNavigation() {
           </Link>
         ) : null}
 
-        <Link
-          href="/dashboard"
-          className="rounded-full bg-portugalGreen px-5 py-3 text-sm font-semibold text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
-        >
-          My Dashboard
-        </Link>
+        {showDashboard ? (
+          <Link
+            href="/dashboard"
+            className="rounded-full bg-portugalGreen px-5 py-3 text-sm font-semibold text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
+          >
+            My Dashboard
+          </Link>
+        ) : null}
       </nav>
     </footer>
   );
