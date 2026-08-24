@@ -81,7 +81,7 @@ export function DashboardShell() {
               className="rounded-[1.5rem] border border-portugalGreen bg-portugalGreen p-4 text-white transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-portugalGreen"
             >
               <span className="text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-white">START</span>
-              {access.isTrialActive ? <p className="mt-3 text-sm font-semibold text-white">14-day trial access</p> : null}
+              <p className="mt-3 text-sm font-semibold text-white">14-day trial — no card required</p>
             </Link>
           ) : (
             <Link
@@ -91,7 +91,7 @@ export function DashboardShell() {
               <span className="flex items-center justify-between gap-2 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-white">
                 START <span aria-hidden="true">🔒</span>
               </span>
-              <p className="mt-3 text-sm font-semibold text-white">Start your 14-day trial</p>
+              <p className="mt-3 text-sm font-semibold text-white">14-day trial — no card required</p>
             </Link>
           )}
           {access.canAccessSmooth ? (
@@ -122,14 +122,13 @@ export function DashboardShell() {
               <span className="flex items-center justify-between gap-2 text-[0.8175rem] font-bold uppercase tracking-[0.14em] text-black">
                 STURDY <span aria-hidden="true">🔒</span>
               </span>
-              <p className="mt-3 text-sm font-semibold text-black">Pass START and subscribe</p>
             </div>
           )}
         </div>
-        <p className="mt-3 text-xs text-muted">Subscribe and when you complete START the next level will open.</p>
         </section>
       </div>
 
+      {ready && access.canAccessStart ? (
       <section id="learn" className="mt-6 scroll-mt-6 pb-6">
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
@@ -140,11 +139,6 @@ export function DashboardShell() {
           </div>
         </div>
 
-        {!ready ? (
-          <div className="rounded-[1.75rem] border border-ink/10 bg-white/70 p-5 text-sm font-semibold text-ink/55" aria-live="polite">
-            Checking lesson access…
-          </div>
-        ) : access.canAccessStart ? (
         <div className="grid gap-3">
           {lessons.map((lesson) => {
             const labels = coreMatchLabels[lesson.slug];
@@ -284,18 +278,8 @@ export function DashboardShell() {
             );
           })}
         </div>
-        ) : (
-          <div className="rounded-[1.75rem] border border-portugalGold/50 bg-portugalGold/10 p-5 sm:max-w-xl">
-            <p className="font-display text-2xl font-bold text-ink">START is locked</p>
-            <p className="mt-2 text-sm leading-6 text-ink/65">
-              Non-paying learners can use START during the 14-day free trial. Subscribe to continue after the trial.
-            </p>
-            <Link href="/sign-up" className="mt-4 inline-flex rounded-full bg-portugalGreen px-5 py-3 text-sm font-bold text-white transition hover:bg-ink">
-              Start 14-day trial
-            </Link>
-          </div>
-        )}
       </section>
+      ) : null}
 
       <section className="card-surface mb-6 p-5 sm:p-6" aria-labelledby="daily-recall-heading">
         <h2 id="daily-recall-heading" className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
