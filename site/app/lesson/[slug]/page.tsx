@@ -1,12 +1,9 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { LessonScreen } from "@/components/lesson-screen";
-import { getLessonBySlug, lessons } from "@/lib/lesson-data";
+import { getLessonBySlug } from "@/lib/lesson-data";
+import { getTrialAccess } from "@/lib/trial-access";
 
-export function generateStaticParams() {
-  return lessons.map((lesson) => ({
-    slug: lesson.slug
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function LessonPage({
   params
@@ -14,6 +11,9 @@ export default async function LessonPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const access = await getTrialAccess();
+  if (access.state === "signed_out") redirect("/sign-up");
+  if (access.state === "expired") redirect("/subscribe-required");
   const lesson = getLessonBySlug(slug);
 
   if (!lesson) {

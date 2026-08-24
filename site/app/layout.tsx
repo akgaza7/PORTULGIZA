@@ -33,7 +33,7 @@ export default function RootLayout({
                 height={808}
                 priority
                 sizes="(max-width: 640px) 179px, 224px"
-                className="h-auto w-[11.18rem] sm:w-[13.98rem]"
+                className="h-auto w-[12.86rem] sm:w-[16.08rem]"
               />
             </Link>
 

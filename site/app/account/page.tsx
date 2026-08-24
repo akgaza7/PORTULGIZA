@@ -73,7 +73,7 @@ export default async function AccountPage() {
         </div>
       </section>
       <section className="mt-6 grid gap-4 md:grid-cols-3">
-        <article className="card-surface p-6"><p className="eyebrow">Free trial</p><p className="mt-3 font-display text-2xl font-bold">Ends {formatDate(subscriber?.trial_ends_at ?? null)}</p><p className="mt-2 text-sm leading-6 text-ink/55">Your trial starts when your account is created.</p></article>
+        <article className="card-surface p-6"><p className="eyebrow">Free trial</p><p className="mt-3 font-display text-2xl font-bold">Ends {formatDate(subscriber?.trial_ends_at ?? null)}</p><p className="mt-2 text-sm leading-6 text-ink/55">Your trial starts when you verify your email and activate START.</p></article>
         <article className="card-surface p-6"><p className="eyebrow">Mastery score</p><p className="mt-3 font-display text-4xl font-bold">{learning?.mastery_score ?? 0}<span className="text-xl text-ink/45">/100</span></p><p className="mt-2 text-sm leading-6 text-ink/55">Synced from your lesson activity.</p></article>
         <article className="card-surface p-6"><p className="eyebrow">Billing</p><p className="mt-3 font-display text-2xl font-bold">{formatSubscriptionStatus(subscriber?.subscription_status, "Not connected")}</p><p className="mt-2 text-sm leading-6 text-ink/55">{subscriber?.current_period_ends_at ? `Current period ends ${formatDate(subscriber.current_period_ends_at)}` : "£4.99 monthly after your free trial. Cancel through Stripe at any time."}</p><SubscriptionActions hasBillingProfile={Boolean(subscriber?.stripe_customer_id)} hasSubscription={Boolean(subscriber?.stripe_subscription_id)} /></article>
       </section>
